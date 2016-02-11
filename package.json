@@ -1,0 +1,42 @@
+{
+  "name": "arui-feather-stub",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node start"
+  },
+  "devDependencies": {
+    "arui-feather": "git+ssh://git@git/ef/arui-feather.git#master",
+    "autoprefixer": "^6.3.1",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "bem-css-loader": "alfa-bank-dev/bem-css-loader#6fa5517",
+    "copy-webpack-plugin": "^1.1.1",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "inflight": "^1.0.4",
+    "postcss-calc": "^5.2.0",
+    "postcss-custom-properties": "^5.0.0",
+    "postcss-for": "^2.0.1",
+    "postcss-import": "^8.0.2",
+    "postcss-loader": "^0.7.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-url": "^5.1.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "uuid": "^2.0.1",
+    "webcomponents.js": "^0.7.20",
+    "webpack": "^1.12.12",
+    "webpack-dev-server": "^1.14.1",
+    "wrappy": "^1.0.1"
+  },
+  "dependencies": {
+    "webpack-postcss-tools": "^1.1.1"
+  }
+}
