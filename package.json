@@ -19,11 +19,15 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "inflight": "^1.0.4",
+    "lost": "^6.7.2",
     "postcss-calc": "^5.2.0",
+    "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.0",
+    "postcss-each": "^0.9.1",
     "postcss-for": "^2.0.1",
     "postcss-import": "^8.0.2",
     "postcss-loader": "^0.7.0",
+    "postcss-mixins": "^4.0.1",
     "postcss-nested": "^1.0.0",
     "postcss-url": "^5.1.1",
     "react": "^0.14.7",
@@ -34,7 +38,7 @@
     "webcomponents.js": "^0.7.20",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
-    "wrappy": "^1.0.1",
-    "webpack-postcss-tools": "^1.1.1"
+    "webpack-postcss-tools": "^1.1.1",
+    "wrappy": "^1.0.1"
   }
 }
