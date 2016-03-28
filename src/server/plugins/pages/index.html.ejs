@@ -6,7 +6,8 @@
         <title>ARUI Feather Bootstrap</title>
     </head>
     <body>
-        <div id="react-app"></div>
-        <script src="app.js"></script>
+        <div id="react-app"><%- content %></div>
+        <script src="assets/index.js"></script>
+        <script>window.__main(<%- state %>);</script>
     </body>
 </html>
