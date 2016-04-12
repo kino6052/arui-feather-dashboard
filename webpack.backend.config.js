@@ -29,6 +29,11 @@ var webpackConfig = Object.assign(
 );
 
 webpackConfig.plugins = Array.from(WEBPACK_CONFIG_TEMPLATE.plugins);
+webpackConfig.plugins.push(
+    new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
+);
 
 webpackConfig.module.loaders.push({
     test: /\.ejs$/,

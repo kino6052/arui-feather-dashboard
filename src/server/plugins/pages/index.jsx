@@ -7,6 +7,7 @@ export let register = function (server, options, next) {
         try {
             let state = await getState(request);
             reply(TEMPLATE({
+                staticAssets: options.staticAssets,
                 content: ReactDOMServer.renderToString(render(state)),
                 state: JSON.stringify(state)
             }));
