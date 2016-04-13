@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const WEBPACK_CONFIG_TEMPLATE = require('arui-feather/webpack.config.template.js');
 const WEBPACK_CONFIG_TEMPLATE_PRODUCTION = require('arui-feather/webpack.config.template.production.js');
@@ -45,7 +46,14 @@ if (IS_PRODUCTION) {
             sourceMap: false,
             warnings: false
         }),
-        new ExtractTextPlugin('assets/[name].css')
+        new ExtractTextPlugin('assets/[name].css'),
+        new CompressionPlugin({
+            asset: '[file].gz',
+            algorithm: 'gzip',
+            regExp: /\.js$|\.css$|\.ttf$|\.svg$/,
+            threshold: 10240,
+            minRatio: 0.8
+        })
     );
 } else {
     Object.assign(webpackConfig, WEBPACK_CONFIG_TEMPLATE_DEVELOPMENT);
