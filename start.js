@@ -10,8 +10,15 @@ const webpackBackendConfig = require('./webpack.backend.config.js');
 
 const PROXY_ASSETS = config.get('proxyAssets');
 
-webpackConfig.entry.unshift('webpack/hot/only-dev-server');
-webpackConfig.entry.unshift('webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port);
+webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((result, item) => {
+    result[item] = [
+        'webpack/hot/only-dev-server',
+        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port,
+        webpackConfig.entry[item],
+    ];
+    return result;
+}, {});
+
 webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 const frontendCompiler = webpack(webpackConfig);
