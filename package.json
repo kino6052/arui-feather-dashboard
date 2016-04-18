@@ -8,7 +8,7 @@
     "test": "jscs ./ --config ./node_modules/arui-feather/.jscsrc && jshint . --config ./node_modules/arui-feather/.jshintrc"
   },
   "devDependencies": {
-    "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.0.3",
+    "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.0.4",
     "autoprefixer": "^6.3.1",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",

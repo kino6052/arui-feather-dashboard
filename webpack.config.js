@@ -12,7 +12,10 @@ const IS_PRODUCTION = (process.env.NODE_ENV === 'production');
 var webpackConfig = Object.assign(
     {
         entry: {
-            index: './src/index.jsx'
+            index: [
+                './node_modules/arui-feather/src/polyfills.js',
+                './src/index.jsx'
+            ]
         },
         output: {
             path: path.resolve(__dirname, '.build'),

@@ -13,9 +13,8 @@ const PROXY_ASSETS = config.get('proxyAssets');
 webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((result, item) => {
     result[item] = [
         'webpack/hot/only-dev-server',
-        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port,
-        webpackConfig.entry[item],
-    ];
+        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port
+    ].concat(webpackConfig.entry[item]);
     return result;
 }, {});
 

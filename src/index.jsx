@@ -1,5 +1,3 @@
-import 'arui-feather/src/polyfills';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
