@@ -1,12 +1,18 @@
 import ReactDOMServer from 'react-dom/server';
 import { render } from '../../../index.jsx';
-const TEMPLATE = require('./index.html.ejs');
+let template = require('./index.html.ejs');
+
+function getState(request) {
+    return {
+        screen: 'screen1'
+    };
+}
 
 export let register = function (server, options, next) {
     let handler = async function (request, reply) {
         try {
             let state = await getState(request);
-            reply(TEMPLATE({
+            reply(template({
                 staticAssets: options.staticAssets,
                 content: ReactDOMServer.renderToString(render(state)),
                 state: JSON.stringify(state)
@@ -24,11 +30,5 @@ export let register = function (server, options, next) {
 register.attributes = {
     name: 'pages/index'
 };
-
-function getState(request) {
-    return {
-        screen: 'screen1'
-    };
-}
 
 export default register;

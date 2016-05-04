@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import FeatherComponent from 'arui-feather/src/feather/feather';
 
 import Page from 'arui-feather/src/page/page';
@@ -38,7 +37,7 @@ class App extends FeatherComponent {
                     <Header
                         menu={
                             <Menu
-                                view="horizontal"
+                                view='horizontal'
                                 content={[
                                     {
                                         content: 'Экран 1',
@@ -74,7 +73,7 @@ class App extends FeatherComponent {
                             />
                         }
                         user={
-                            <User url="#" text="Михаил Фридман" />
+                            <User url='#' text='Михаил Фридман' />
                         }
                     />
                 }

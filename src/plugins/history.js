@@ -4,6 +4,7 @@ export default function historyPlugin(store) {
     }
 
     let prevState = store.getState();
+    console.log(prevState);
 
     store.subscribe(state => {
         prevState = state;
