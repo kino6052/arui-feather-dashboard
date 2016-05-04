@@ -1,17 +1,18 @@
 import ReactDOMServer from 'react-dom/server';
 import { render } from '../../../index.jsx';
 let template = require('./index.html.ejs');
+import { screens } from '../../../screen-const.js';
 
-function getState(request) {
+function getState(screen) {
     return {
-        screen: 'screen1'
+        screen
     };
 }
 
 export let register = function (server, options, next) {
-    let handler = async function (request, reply) {
+    let routeHandler = async function (request, reply, screen) {
         try {
-            let state = await getState(request);
+            let state = await getState(screen);
             reply(template({
                 staticAssets: options.staticAssets,
                 content: ReactDOMServer.renderToString(render(state)),
@@ -23,7 +24,17 @@ export let register = function (server, options, next) {
         }
     };
 
-    server.route({ method: 'GET', path: '/', handler });
+    server.route(
+        Object.keys(screens).map(key => {
+            return {
+                method: 'GET',
+                path: screens[key].path,
+                handler: (request, reply) => {
+                    routeHandler(request, reply, screens[key].name);
+                }
+            };
+        })
+    );
     next();
 };
 
