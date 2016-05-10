@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
+const ASSETS_PATH = 'assets/';
 const WEBPACK_CONFIG_TEMPLATE = require('arui-feather/webpack.config.template.js');
 const WEBPACK_CONFIG_TEMPLATE_PRODUCTION = require('arui-feather/webpack.config.template.production.js');
 const WEBPACK_CONFIG_TEMPLATE_DEVELOPMENT = require('arui-feather/webpack.config.template.development.js');
@@ -20,7 +21,7 @@ var webpackConfig = Object.assign(
         output: {
             path: path.resolve(__dirname, '.build'),
             publicPath: '/',
-            filename: 'assets/[name].js'
+            filename: ASSETS_PATH + '[name].js'
         }
     },
     WEBPACK_CONFIG_TEMPLATE
@@ -43,13 +44,21 @@ if (IS_PRODUCTION) {
         }
     });
 
+    webpackConfig.module.loaders
+        .filter(loader => loader.loader === 'url-loader')
+        .forEach(loader => {
+            if (loader.query && loader.query.name) {
+                loader.query.name = ASSETS_PATH + loader.query.name;
+            }
+        });
+
     webpackConfig.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
             beautify: true,
             sourceMap: false,
             warnings: false
         }),
-        new ExtractTextPlugin('assets/[name].css'),
+        new ExtractTextPlugin(ASSETS_PATH + '[name].css'),
         new CompressionPlugin({
             asset: '[file].gz',
             algorithm: 'gzip',
