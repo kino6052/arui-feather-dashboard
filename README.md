@@ -12,7 +12,7 @@ ARUI Feather Stub
 
 1. `npm i`
 2. `npm run build`
-3. После чего можно проверить сборку командой `NODE_ENV=production ./.build/server.js`
+3. После чего можно проверить сборку командой `NODE_ENV=production node ./.build/server.js`
 
 О структуре проекта
 -------------------
