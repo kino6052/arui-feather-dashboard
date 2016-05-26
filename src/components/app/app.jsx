@@ -10,6 +10,7 @@ import Paragraph from 'arui-feather/src/paragraph/paragraph';
 import Menu from 'arui-feather/src/menu/menu';
 import User from 'arui-feather/src/user/user';
 
+import { screens } from '../../screen-const.js';
 import { changeScreen } from '../../actions/screen';
 
 import cn from 'arui-feather/src/cn';
@@ -41,31 +42,31 @@ class App extends FeatherComponent {
                                 content={[
                                     {
                                         content: 'Экран 1',
-                                        value: 'screen1',
+                                        value: screens.SCREEN_1.name,
                                         props: {
-                                            url: './screen1',
+                                            url: screens.SCREEN_1.path,
                                             onClick: (e) => {
-                                                this.handleMenuClick(e, 'screen1');
+                                                this.handleMenuClick(e, screens.SCREEN_1.name);
                                             }
                                         }
                                     },
                                     {
                                         content: 'Экран 2',
-                                        value: 'screen2',
+                                        value: screens.SCREEN_2.name,
                                         props: {
-                                            url: './screen2',
+                                            url: screens.SCREEN_2.path,
                                             onClick: (e) => {
-                                                this.handleMenuClick(e, 'screen2');
+                                                this.handleMenuClick(e, screens.SCREEN_2.name);
                                             }
                                         }
                                     },
                                     {
                                         content: 'Экран 3',
-                                        value: 'screen3',
+                                        value: screens.SCREEN_3.name,
                                         props: {
-                                            url: './screen3',
+                                            url: screens.SCREEN_3.path,
                                             onClick: (e) => {
-                                                this.handleMenuClick(e, 'screen3');
+                                                this.handleMenuClick(e, screens.SCREEN_3.name);
                                             }
                                         }
                                     }
@@ -85,7 +86,7 @@ class App extends FeatherComponent {
     }
 
     renderScreen(cn, screen) {
-        if (screen === 'screen1') {
+        if (screen === screens.SCREEN_1.name) {
             return (
                 <div>
                     <AppTitle>
@@ -103,7 +104,7 @@ class App extends FeatherComponent {
                     </AppContent>
                 </div>
             );
-        } else if (screen === 'screen2') {
+        } else if (screen === screens.SCREEN_2.name) {
             return (
                 <div>
                     <AppTitle>
