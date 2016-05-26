@@ -1,3 +1,4 @@
+/* eslint no-console: ["error", { allow: ["log", "error"] }] */
 import 'babel-polyfill';
 
 import config from 'config';
@@ -39,7 +40,7 @@ server.register(plugins, function (error) {
 
     server.start(error => {
         if (error) {
-            console.log(`Server start failed: ${error.toString()}`);
+            console.error(`Server start failed: ${error.toString()}`);
             throw error;
         }
         console.log(`Server is running: ${server.info.uri}...`);
