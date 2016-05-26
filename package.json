@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node start",
     "build": "NODE_ENV=production node build",
+    "build-static": "NODE_ENV=production node build-static",
     "test": "eslint ./src/ --config ./node_modules/arui-feather/.eslintrc && jshint . --config ./node_modules/arui-feather/.jshintrc"
   },
   "devDependencies": {
@@ -20,6 +21,7 @@
     "compression-webpack-plugin": "^0.3.1",
     "config": "^1.19.0",
     "css-loader": "^0.23.1",
+    "ejs": "^2.4.2",
     "ejs-compiled-loader": "^2.1.1",
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^7.0.0",
@@ -57,8 +59,8 @@
     "babel-polyfill": "^6.7.4",
     "hapi": "^13.2.2",
     "node-noop": "^1.0.0",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1"
   }
