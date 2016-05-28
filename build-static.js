@@ -6,7 +6,7 @@ const ejs = require('ejs');
 const ReactDOMServer = require('react-dom/server');
 
 const webpackConfig = require('./webpack.config.js');
-webpackConfig.output.libraryTarget = 'commonjs';
+webpackConfig.output.libraryTarget = 'umd';
 const compiler = webpack(webpackConfig);
 
 const ASSETS_PATH = './assets/';
