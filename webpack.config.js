@@ -1,8 +1,10 @@
 const path = require('path');
+const config = require('config');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
+const PROXY_ASSETS = config.get('proxyAssets');
 const ASSETS_PATH = './assets/';
 const WEBPACK_CONFIG_TEMPLATE = require('arui-feather/webpack.config.template.js');
 const WEBPACK_CONFIG_TEMPLATE_PRODUCTION = require('arui-feather/webpack.config.template.production.js');
@@ -20,7 +22,7 @@ var webpackConfig = Object.assign(
         },
         output: {
             path: path.resolve(__dirname, '.build'),
-            publicPath: IS_PRODUCTION ? '.' : '/',
+            publicPath: IS_PRODUCTION ? '.' : '//' + PROXY_ASSETS.host + ':' + PROXY_ASSETS.port + '/',
             filename: ASSETS_PATH + '[name].js'
         }
     },
