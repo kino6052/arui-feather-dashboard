@@ -27,7 +27,7 @@ export default function historyPlugin(store) {
     store.subscribe(() => {
         if (isStateChangeTriggeredByRoute) {
             isStateChangeTriggeredByRoute = false;
-            return false;
+            return;
         }
 
         let state = store.getState();
@@ -36,8 +36,6 @@ export default function historyPlugin(store) {
             prevState = state;
             pushHistoryState(state);
         }
-
-        return undefined;
     });
 
     window.addEventListener('popstate', function () {
