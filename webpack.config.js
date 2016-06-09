@@ -3,9 +3,11 @@ const config = require('config');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PROXY_ASSETS = config.get('proxyAssets');
 const ASSETS_PATH = './assets/';
+const BUILD_PATH = './.build/';
 const WEBPACK_CONFIG_TEMPLATE = require('arui-feather/webpack.config.template.js');
 const WEBPACK_CONFIG_TEMPLATE_PRODUCTION = require('arui-feather/webpack.config.template.production.js');
 const WEBPACK_CONFIG_TEMPLATE_DEVELOPMENT = require('arui-feather/webpack.config.template.development.js');
@@ -21,7 +23,7 @@ var webpackConfig = Object.assign(
             ]
         },
         output: {
-            path: path.resolve(__dirname, '.build'),
+            path: path.resolve(__dirname, BUILD_PATH),
             publicPath: IS_PRODUCTION ? '.' : '//' + PROXY_ASSETS.host + ':' + PROXY_ASSETS.port + '/',
             filename: ASSETS_PATH + '[name].js'
         }
@@ -34,6 +36,15 @@ webpackConfig.plugins.push(
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
+);
+
+webpackConfig.plugins.push(
+    new CopyWebpackPlugin([
+        {
+            from: path.resolve(__dirname, 'src/icons'),
+            to: path.resolve(BUILD_PATH, ASSETS_PATH)
+        }
+    ])
 );
 
 if (IS_PRODUCTION) {

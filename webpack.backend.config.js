@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 
+const BUILD_PATH = './.build/';
 const IS_PRODUCTION = (process.env.NODE_ENV === 'production');
 const WEBPACK_CONFIG_TEMPLATE = require('arui-feather/webpack.config.template.js');
 
@@ -19,7 +20,7 @@ var webpackConfig = Object.assign(
         target: 'node',
         entry: ['./src/server/server.js'],
         output: {
-            path: path.resolve(__dirname, '.build'),
+            path: path.resolve(__dirname, BUILD_PATH),
             publicPath: '/',
             filename: 'server.js'
         },

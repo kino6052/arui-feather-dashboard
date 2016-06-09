@@ -4,10 +4,26 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1">
         <title>ARUI Feather Bootstrap</title>
+        <!-- Standard Favicon -->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+        <!-- For iPhone: -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/apple-touch-icon-57x57-precomposed.png">
+        <!-- For iPad: -->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/apple-touch-icon-72x72-precomposed.png">
+        <!-- For iPhone 4 Retina display: -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/apple-touch-icon-114x114-precomposed.png">
+        <!-- For Google TV Favicon -->
+        <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png">
+        <!-- For Chrome Web Store  -->
+        <link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-128x128.png">
+        <!-- Opera speed dial ico <!-- Opera speed dial icon -->
+        <link rel="icon" type="image/png" sizes="195x195" href="assets/favicon-195x195.png">
+
+        <% if (staticAssets) { %>
+        <link rel="stylesheet" href="assets/index.css" />
+        <% } %>
     </head>
-    <% if (staticAssets) { %>
-    <link rel="stylesheet" href="assets/index.css" />
-    <% } %>
     <body>
         <div id="react-app"><%- content %></div>
         <script src="assets/index.js"></script>
