@@ -6,7 +6,7 @@
     "start": "node start",
     "build": "NODE_ENV=production node build",
     "build-static": "NODE_ENV=production node build-static",
-    "test": "eslint ./src/ --config ./node_modules/arui-feather/.eslintrc && jshint . --config ./node_modules/arui-feather/.jshintrc"
+    "test": "eslint ./src/ --config ./node_modules/arui-feather/.eslintrc"
   },
   "devDependencies": {
     "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.1.13",
@@ -34,7 +34,6 @@
     "git-hooks": "^1.0.2",
     "h2o2": "^5.1.0",
     "inert": "^3.2.0",
-    "jshint": "^2.9.1",
     "json-loader": "^0.5.4",
     "lost": "^6.7.2",
     "postcss-calc": "^5.2.0",
