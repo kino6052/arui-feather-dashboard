@@ -13,6 +13,7 @@ const ASSETS_PATH = './assets/';
 const STATIC_PAGE = 'index';
 const template = fs.readFileSync('./src/server/plugins/pages/' + STATIC_PAGE + '.html.ejs').toString();
 const state = require('./static/state.json');
+const SERVER_SIDE_RENDER = !process.env.PREVENT_PRE_RENDER;
 
 if (fs.existsSync(webpackConfig.output.path)) {
     rimraf.sync(webpackConfig.output.path);
@@ -55,7 +56,7 @@ compiler.run(function(error, stats) {
         path.join(webpackConfig.output.path, 'index.html'),
         ejs.render(template, {
             staticAssets: true,
-            content: ReactDOMServer.renderToString(render(state)),
+            content: SERVER_SIDE_RENDER ? ReactDOMServer.renderToString(render(state)) : '',
             state: JSON.stringify(state)
         })
     );
