@@ -1,3 +1,5 @@
+/* eslint no-console: ["error", { allow: ["log", "error"] }] */
+
 import ReactDOMServer from 'react-dom/server';
 import { render } from '../../../index.jsx';
 let template = require('./index.html.ejs');
@@ -25,7 +27,7 @@ export let register = function (server, options, next) {
     };
 
     server.route(
-        Object.keys(screens).map(key => {
+        Object.keys(screens).map(function (key) {
             return {
                 method: 'GET',
                 path: screens[key].path,

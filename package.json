@@ -6,7 +6,7 @@
     "start": "node start",
     "build": "NODE_ENV=production node build",
     "build-static": "NODE_ENV=production node build-static",
-    "test": "eslint ./src/ --config ./node_modules/arui-feather/.eslintrc"
+    "test": "eslint ./src/ --ext .js,.jsx --config ./node_modules/arui-feather/.eslintrc"
   },
   "devDependencies": {
     "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.1.28",
