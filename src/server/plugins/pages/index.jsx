@@ -5,16 +5,13 @@ import { render } from '../../../index.jsx';
 let template = require('./index.html.ejs');
 import { screens } from '../../../screen-const.js';
 
-function getState(screen) {
-    return {
-        screen
-    };
-}
+import { prepareStateForIndexPage } from './state';
 
 export let register = function (server, options, next) {
     let routeHandler = async function (request, reply, screen) {
         try {
-            let state = await getState(screen);
+            let state = await prepareStateForIndexPage(screen);
+
             reply(template({
                 staticAssets: options.staticAssets,
                 content: ReactDOMServer.renderToString(render(state)),
