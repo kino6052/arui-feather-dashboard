@@ -7,7 +7,7 @@ module.exports = {
         port: 9090
     },
     devtools: true,
-    app: {
+    client: {
         authPage: '/'
     }
 };

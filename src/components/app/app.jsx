@@ -23,7 +23,7 @@ import { connect } from 'react-redux';
 function mapStateToProps(state) {
     return {
         screen: state.screen,
-        hasError: state.hasError,
+        error: state.error,
         authPage: state.settings.authPage
     };
 }
@@ -36,7 +36,7 @@ function mapDispatchToProps(dispatch) {
 @cn('app')
 class App extends FeatherComponent {
     render(cn) {
-        return !this.props.hasError ? this.renderPage(cn) : this.renderErrorPage(cn);
+        return !this.props.error ? this.renderPage(cn) : this.renderErrorPage(cn);
     }
 
     renderPage(cn) {

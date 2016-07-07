@@ -5,12 +5,12 @@ import { render } from '../../../index.jsx';
 let template = require('./index.html.ejs');
 import { screens } from '../../../screen-const.js';
 
-import { prepareStateForIndexPage } from './state';
+import { getState } from './index-state';
 
 export let register = function (server, options, next) {
     let routeHandler = async function (request, reply, screen) {
         try {
-            let state = await prepareStateForIndexPage(screen);
+            let state = getState(screen);
 
             reply(template({
                 staticAssets: options.staticAssets,

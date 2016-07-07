@@ -1,6 +1,6 @@
 {
     "screen": "SCREEN_1",
-    "hasError": false,
+    "error": false,
     "settings": {
         "authPage": "/"
     }
