@@ -1,6 +1,7 @@
 import FeatherComponent from 'arui-feather/src/feather/feather';
 
 import Page from 'arui-feather/src/page/page';
+import ErrorPage from 'arui-feather/src/error-page/error-page';
 import Header from 'arui-feather/src/header/header';
 import Footer from 'arui-feather/src/footer/footer';
 import AppTitle from 'arui-feather/src/app-title/app-title';
@@ -20,7 +21,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
-    return { screen: state.screen };
+    return {
+        screen: state.screen,
+        error: state.error,
+        authPage: state.settings.authPage
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -31,6 +36,10 @@ function mapDispatchToProps(dispatch) {
 @cn('app')
 class App extends FeatherComponent {
     render(cn) {
+        return !this.props.error ? this.renderPage(cn) : this.renderErrorPage(cn);
+    }
+
+    renderPage(cn) {
         return (
             <Page
                 className={ cn }
@@ -82,6 +91,16 @@ class App extends FeatherComponent {
             >
                 { this.renderScreen(cn, this.props.screen) }
             </Page>
+        );
+    }
+
+    renderErrorPage(cn) {
+        return (
+            <ErrorPage
+                className={ cn }
+                returnUrl={ this.props.authPage }
+                header={ <Header /> }
+            />
         );
     }
 

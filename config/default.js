@@ -6,5 +6,8 @@ module.exports = {
         host: 'localhost',
         port: 9090
     },
-    devtools: true
+    devtools: true,
+    client: {
+        authPage: '/'
+    }
 };
