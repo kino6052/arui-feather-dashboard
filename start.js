@@ -13,10 +13,20 @@ const PROXY_ASSETS = config.get('proxyAssets');
 webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((result, item) => {
     result[item] = [
         'webpack/hot/only-dev-server',
-        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port
+        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port,
+        'react-hot-loader/patch'
     ].concat(webpackConfig.entry[item]);
+
     return result;
 }, {});
+
+webpackConfig.module.loaders
+    .filter(loader => loader.loader === 'babel')
+    .forEach(loader => {
+        if (loader.query && loader.query.plugins) {
+            loader.query.plugins = ['react-hot-loader/babel'].concat(loader.query.plugins);
+        }
+    });
 
 webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 

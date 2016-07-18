@@ -11,7 +11,7 @@
     "quality-check": "npm run test && npm run karma"
   },
   "devDependencies": {
-    "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.1.30",
+    "arui-feather": "git+ssh://git@git/ef/arui-feather.git#feat/add-react-hot-loader",
     "autoprefixer": "^6.3.1",
     "babel-core": "^6.4.5",
     "babel-eslint": "^6.0.3",
@@ -68,6 +68,7 @@
     "postcss-nested": "^1.0.0",
     "postcss-url": "^5.1.1",
     "react-addons-test-utils": "^15.2.0",
+    "react-hot-loader": "3.0.0-beta.1",
     "redux-devtools": "^3.1.1",
     "redux-thunk": "^2.1.0",
     "respawn": "^2.3.0",
