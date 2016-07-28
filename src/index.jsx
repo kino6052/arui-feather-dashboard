@@ -13,8 +13,7 @@ if (typeof window !== 'undefined') {
 
         ReactDOM.render(<AppContainer><Root store={ store } /></AppContainer>, document.getElementById('react-app'));
 
-
-        if (module.hot) {
+        if (process.env.NODE_ENV !== 'production' && module.hot) {
             module.hot.accept(['./root', './configureStore'], () => {
                 let NextAppAssignments = require('./root').default;
 
