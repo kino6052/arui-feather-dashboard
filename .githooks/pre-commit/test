@@ -5,5 +5,5 @@ var exec = require('child_process').execSync;
 var gitCachedFiles = exec('git diff --cached --name-only --diff-filter=ACMR').toString().trim();
 
 if (gitCachedFiles) {
-    spawn('npm', ['run', 'quality-check'], {stdio: 'inherit'}).on('close', process.exit.bind(process));
+    spawn('npm', ['test'], {stdio: 'inherit'}).on('close', process.exit.bind(process));
 }
