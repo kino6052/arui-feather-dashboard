@@ -13,14 +13,14 @@ const PLUGINS = [
     historyPlugin
 ];
 
-function configureStore(isServer = false) {
+function configureStore(isHotLoaderRequired = false) {
     const middleware = applyMiddleware(...MIDDLEWARES);
 
     return state => {
         const store = createStore(appReducer, state, middleware);
         PLUGINS.forEach(plugin => plugin(store));
 
-        if (!isServer || (process.env.NODE_ENV !== 'production' && module.hot)) {
+        if (isHotLoaderRequired && module.hot) {
             module.hot.accept('./reducers/app-reducer', () => {
                 store.replaceReducer(require('./reducers/app-reducer').default);
             });

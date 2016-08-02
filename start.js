@@ -8,25 +8,33 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('./webpack.config.js');
 const webpackBackendConfig = require('./webpack.backend.config.js');
 
+const HOT_LOADER = !!process.env.HOT_LOADER;
 const PROXY_ASSETS = config.get('proxyAssets');
 
 webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((result, item) => {
     result[item] = [
         'webpack/hot/only-dev-server',
-        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port,
-        'react-hot-loader/patch'
-    ].concat(webpackConfig.entry[item]);
+        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port
+    ];
+
+    if (HOT_LOADER) {
+        result[item] = result[item].concat('react-hot-loader/patch');
+    }
+
+    result[item] = result[item].concat(webpackConfig.entry[item]);
 
     return result;
 }, {});
 
-webpackConfig.module.loaders
-    .filter(loader => loader.loader === 'babel')
-    .forEach(loader => {
-        if (loader.query && loader.query.plugins) {
-            loader.query.plugins = ['react-hot-loader/babel'].concat(loader.query.plugins);
-        }
-    });
+if (HOT_LOADER) {
+    webpackConfig.module.loaders
+        .filter(loader => loader.loader === 'babel')
+        .forEach(loader => {
+            if (loader.query && loader.query.plugins) {
+                loader.query.plugins = ['react-hot-loader/babel'].concat(loader.query.plugins);
+            }
+        });
+}
 
 webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 

@@ -12,7 +12,7 @@ export let register = function (server, options, next) {
     let routeHandler = async function (request, reply, screen) {
         try {
             let state = getState(screen);
-            let store = configureStore(true)(state);
+            let store = configureStore()(state);
 
             reply(template({
                 staticAssets: options.staticAssets,
