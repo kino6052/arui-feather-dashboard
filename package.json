@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "postinstall": "cp ./node_modules/arui-feather/.eslintrc ./",
     "start": "node start",
     "build": "NODE_ENV=production node build",
     "build-static": "NODE_ENV=production node build-static",
     "karma": "karma start",
-    "test": "eslint ./src/ --ext .js,.jsx --config ./node_modules/arui-feather/.eslintrc",
+    "test": "eslint ./src/ --ext .js,.jsx",
     "quality-check": "npm run test && npm run karma"
   },
   "devDependencies": {
