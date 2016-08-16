@@ -7,9 +7,10 @@
     "start": "node start",
     "build": "NODE_ENV=production node build",
     "build-static": "NODE_ENV=production node build-static",
+    "check-css": "stylelint ./src/**/*.css",
     "karma": "karma start",
     "test": "eslint ./src/ --ext .js,.jsx",
-    "quality-check": "npm run test && npm run karma"
+    "quality-check": "npm run test && npm run check-css && npm run karma"
   },
   "devDependencies": {
     "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.1.30",
@@ -74,6 +75,7 @@
     "respawn": "^2.3.0",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.0",
+    "stylelint": "^7.1.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
