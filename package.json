@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "provide-ssh": "npm run copy-keys && npm run copy-hosts",
+    "copy-keys": "mkdir -p ./ssh/ && cp -r ~/.ssh/* ./ssh/",
+    "copy-hosts": "ssh-keyscan git > ./ssh/known_hosts",
+    "extrapackage": "cat package.json | jq 'setpath([ \"version\"]; \"42.0.0\")' > tmp-package.json",
+    "predocker-build": "npm run provide-ssh && npm run extrapackage",
+    "docker-build": "docker build -t docker.moscow.alfaintra.net/$npm_package_name:$npm_package_version .",
+    "postdocker-build": "docker push docker.moscow.alfaintra.net/$npm_package_name:$npm_package_version",
+
     "postinstall": "cp ./node_modules/arui-feather/.eslintrc ./",
     "start": "node start",
     "build": "NODE_ENV=production node build",
@@ -84,6 +92,7 @@
   "dependencies": {
     "babel-polyfill": "^6.7.4",
     "hapi": "^13.2.2",
+    "jq-cli-wrapper": "0.3.0",
     "node-noop": "^1.0.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
