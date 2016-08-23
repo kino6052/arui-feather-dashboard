@@ -50,7 +50,7 @@ compiler.run(function(error, stats) {
         webpackConfig.output.path,
         ASSETS_PATH,
         STATIC_PAGE + '.js'
-    )).render;
+    )).renderStatic;
 
     fs.writeFileSync(
         path.join(webpackConfig.output.path, 'index.html'),
