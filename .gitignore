@@ -5,3 +5,4 @@ coverage/
 npm-debug.log
 test-results.xml
 /.eslintrc
+tmp-package.json
