@@ -21,6 +21,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
+    state = state.app;
     return {
         screen: state.screen,
         error: state.error,

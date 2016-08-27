@@ -5,18 +5,15 @@ let template = require('./index.html.ejs');
 import { screens } from '../../../screen-const.js';
 
 import { getState } from './index-state';
-import configureStore from '../../../configureStore';
-import Root from '../../../root';
 
 export let register = function (server, options, next) {
     let routeHandler = async function (request, reply, screen) {
         try {
             let state = getState(screen);
-            let store = configureStore()(state);
 
             reply(template({
                 staticAssets: options.staticAssets,
-                content: ReactDOMServer.renderToString(<Root store={ store } />),
+                content: ReactDOMServer.renderToString(<div />),
                 state: JSON.stringify(state)
             }));
         } catch (error) {
