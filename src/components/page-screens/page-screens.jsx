@@ -13,7 +13,9 @@ class ScreenPage extends React.Component {
     };
     render() {
         const { pageKey, routeParams } = this.props;
-        const defaultKey = routeParams ? Math.min(screens.length - 1, Math.max(routeParams.screenId - 1, 0)) : 0;
+        const defaultKey = routeParams
+            ? Math.min(screens.length - 1, Math.max(routeParams.screenId - 1, 0))
+            : 0;
         const { about, title } = screens[pageKey || defaultKey];
         return (
             <div>

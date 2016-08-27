@@ -6,7 +6,7 @@ import Header from 'arui-feather/src/header/header';
 import Footer from 'arui-feather/src/footer/footer';
 import Menu from 'arui-feather/src/menu/menu';
 import User from 'arui-feather/src/user/user';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
 
 import { screens } from '../../screen-const.js';
 import { changeScreen } from '../../actions/screen';
@@ -36,7 +36,6 @@ class App extends FeatherComponent {
     handleMenuClick(evt, screenInd) {
         evt.preventDefault();
         browserHistory.push(`/screen/${screenInd}`);
-        // this.props.changeScreen(screen);
     }
 
     render(cn) {
