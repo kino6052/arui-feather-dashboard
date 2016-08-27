@@ -6,8 +6,7 @@ import Header from 'arui-feather/src/header/header';
 import Footer from 'arui-feather/src/footer/footer';
 import Menu from 'arui-feather/src/menu/menu';
 import User from 'arui-feather/src/user/user';
-
-import ScreenPage from '../page-screens/page-screens';
+import { browserHistory } from 'react-router'
 
 import { screens } from '../../screen-const.js';
 import { changeScreen } from '../../actions/screen';
@@ -34,11 +33,27 @@ function mapDispatchToProps(dispatch) {
 @connect(mapStateToProps, mapDispatchToProps)
 @cn('app')
 class App extends FeatherComponent {
+    handleMenuClick(evt, screenInd) {
+        evt.preventDefault();
+        browserHistory.push(`/screen/${screenInd}`);
+        // this.props.changeScreen(screen);
+    }
+
     render(cn) {
         return !this.props.error ? this.renderPage(cn) : this.renderErrorPage(cn);
     }
 
     renderPage(cn) {
+        const menuContent = screens.map((data, ind) => ({
+            content: data.title,
+            value: data.name,
+            props: {
+                url: data.path,
+                onClick: (evt) => {
+                    this.handleMenuClick(evt, ++ind);
+                }
+            }
+        }));
         return (
             <Page
                 className={ cn }
@@ -47,38 +62,7 @@ class App extends FeatherComponent {
                         menu={
                             <Menu
                                 view='horizontal'
-                                content={[
-                                    {
-                                        content: 'Экран 1',
-                                        value: screens.SCREEN_1.name,
-                                        props: {
-                                            url: screens.SCREEN_1.path,
-                                            onClick: (e) => {
-                                                this.handleMenuClick(e, screens.SCREEN_1.name);
-                                            }
-                                        }
-                                    },
-                                    {
-                                        content: 'Экран 2',
-                                        value: screens.SCREEN_2.name,
-                                        props: {
-                                            url: screens.SCREEN_2.path,
-                                            onClick: (e) => {
-                                                this.handleMenuClick(e, screens.SCREEN_2.name);
-                                            }
-                                        }
-                                    },
-                                    {
-                                        content: 'Экран 3',
-                                        value: screens.SCREEN_3.name,
-                                        props: {
-                                            url: screens.SCREEN_3.path,
-                                            onClick: (e) => {
-                                                this.handleMenuClick(e, screens.SCREEN_3.name);
-                                            }
-                                        }
-                                    }
-                                ]}
+                                content={ menuContent }
                             />
                         }
                         user={
@@ -88,7 +72,7 @@ class App extends FeatherComponent {
                 }
                 footer={ <Footer /> }
             >
-                { this.renderScreen(cn, this.props.screen) }
+                { this.props.children }
             </Page>
         );
     }
@@ -101,44 +85,6 @@ class App extends FeatherComponent {
                 header={ <Header /> }
             />
         );
-    }
-
-    renderScreen(cn, screenKey) {
-        const pageProps = ({
-            SCREEN_1: {
-                about: `Чистая прибыль Банковской группы выросла в 15 раз по сравнению с предыдущим годом и
-                        достигла 480 млн. долларов США (против 33 млн. долларов США по итогам 2014 года).
-                        Операционная прибыль до создания резервов составила 2 257 млн. долларов США
-                        (снижение на 12,9% по сравнению с 2014 годом объясняется ослаблением среднего
-                        курса рубля — на 58,7% за год). В рублевом эквиваленте операционная прибыль
-                        до создания резервов выросла в 2015 году более чем на треть (+38,2%).`,
-                title: 'Screen 1'
-            },
-            SCREEN_2: {
-                about: `В 2015 году улучшился показатель стоимости риска Банковской
-                        группы «Альфа-Банк» — уменьшение с 3.96% до 3.12%, благодаря
-                        снижению темпов роста проблемной задолженности. При этом
-                        традиционно консервативный подход в анализе рисков отразился
-                        в увеличении ставки резервирования с 5,8% до 6,5%.`,
-                title: 'Screen 2'
-            },
-            SCREEN_3: {
-                about: `Положительная динамика на рынке ценных бумаг и волатильность на валютном рынке
-                        позволили Банковской группе «Альфа-Банк» получить в 2015 году значительный доход
-                        по операциям с ценными бумагами, деривативами и иностранной валютой
-                        в размере 334 млн. долларов США.`,
-                title: 'Screen 3'
-            }
-        }[screenKey]);
-
-        return (
-            <ScreenPage { ...pageProps } />
-        );
-    }
-
-    handleMenuClick(e, screen) {
-        e.preventDefault();
-        this.props.changeScreen(screen);
     }
 }
 
