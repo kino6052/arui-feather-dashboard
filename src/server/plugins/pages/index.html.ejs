@@ -22,12 +22,12 @@
         <link rel="icon" type="image/png" sizes="195x195" href="assets/favicon-195x195.png">
 
         <% if (staticAssets) { %>
-        <link rel="stylesheet" href="assets/index.css" />
+        <link rel="stylesheet" href="/assets/index.css" />
         <% } %>
     </head>
     <body>
         <div id="react-app"><%- content %></div>
-        <script src="assets/index.js"></script>
+        <script src="/assets/index.js"></script>
         <script>window.__main(<%- state %>);</script>
     </body>
 </html>

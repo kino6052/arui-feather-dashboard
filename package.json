@@ -92,6 +92,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
+    "boom": "^4.0.0",
     "hapi": "^13.2.2",
     "node-noop": "^1.0.0",
     "react": "^15.1.0",

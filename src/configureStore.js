@@ -21,9 +21,9 @@ function configureStore(isHotLoaderRequired = false) {
             applyMiddleware(...middlewares));
 
         if (isHotLoaderRequired && module.hot) {
-            module.hot.accept('./reducers/app-reducer', () => {
-                store.replaceReducer(require('./reducers/app-reducer').default);
-            });
+            // module.hot.accept('./reducers/app-reducer', () => {
+            //     store.replaceReducer(require('./reducers/app-reducer').default);
+            // });
         }
 
         return store;

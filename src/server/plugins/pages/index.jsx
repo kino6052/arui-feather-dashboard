@@ -1,38 +1,59 @@
 /* eslint no-console: ["error", { allow: ["log", "error"] }] */
+import Boom from 'boom';
+import { RouterContext, createMemoryHistory, match } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { Provider } from 'react-redux';
+import configureStore from '../../../configureStore';
+import routes from '../../../routes';
 
-import ReactDOMServer from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 let template = require('./index.html.ejs');
-import { screens } from '../../../screen-const.js';
 
 import { getState } from './index-state';
 
 export let register = function (server, options, next) {
-    let routeHandler = async function (request, reply, screen) {
-        try {
-            let state = getState(screen);
-
-            reply(template({
-                staticAssets: options.staticAssets,
-                content: ReactDOMServer.renderToString(<div />),
-                state: JSON.stringify(state)
-            }));
-        } catch (error) {
-            console.error(error, error.stack);
-            reply(error);
-        }
+    let handler = async function (request, reply) {
+        let path = request.url.path;
+        const state = getState('screen1');
+        const memoryHistory = createMemoryHistory(path);
+        const store = configureStore()();
+        const history = syncHistoryWithStore(memoryHistory, store);
+        match({ history, routes, location: path }, (error, redirectLocation, renderProps) => {
+            if (error) {
+                /* eslint no-console: "off" */
+                console.error(error);
+                reply(Boom.badImplementation());
+            } else if (redirectLocation) {
+                reply().redirect(redirectLocation.pathname + redirectLocation.search);
+            } else if (renderProps) {
+                let page;
+                const appCode = (
+                    <Provider store={store}>
+                        <RouterContext {...renderProps} />
+                    </Provider>
+                );
+                try {
+                    page = template({
+                        staticAssets: options.staticAssets,
+                        content: renderToString(appCode),
+                        state: JSON.stringify(state)
+                    });
+                } catch (error) {
+                    /* eslint no-console: "off" */
+                    console.error('error during render', error);
+                    reply(Boom.badImplementation());
+                }
+                reply(page);
+            } else {
+                /* eslint no-console: "off" */
+                console.error('no such page');
+                reply(Boom.notFound());
+            }
+        });
     };
 
-    server.route(
-        Object.keys(screens).map(function (key) {
-            return {
-                method: 'GET',
-                path: screens[key].path,
-                handler: (request, reply) => {
-                    routeHandler(request, reply, screens[key].name);
-                }
-            };
-        })
-    );
+    server.route({ method: 'GET', path: '/{whateverPath?}', handler }); // root route
+    server.route({ method: 'GET', path: '/{whateverPath*}', handler }); // hack to support several slashes in path
     next();
 };
 

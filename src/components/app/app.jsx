@@ -22,7 +22,7 @@ function mapStateToProps(state) {
     return {
         screen: state.screen,
         error: state.error,
-        authPage: state.settings.authPage
+        authPage: state.settings && state.settings.authPage
     };
 }
 
