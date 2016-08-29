@@ -15,10 +15,11 @@
     "start": "node start",
     "build": "NODE_ENV=production node build",
     "build-static": "NODE_ENV=production node build-static",
-    "check-css": "stylelint ./src/**/*.css",
+    "lint-css": "stylelint ./src/**/*.css",
+    "lint-js": "eslint ./src/ --ext .js,.jsx",
+    "lint": "npm run lint-css && npm run lint-js",
     "karma": "karma start",
-    "test": "eslint ./src/ --ext .js,.jsx",
-    "quality-check": "npm run test && npm run check-css && npm run karma"
+    "test": "npm run lint && npm run karma"
   },
   "devDependencies": {
     "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.3.5",
