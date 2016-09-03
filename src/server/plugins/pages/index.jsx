@@ -7,20 +7,19 @@ import configureStore from '../../../configureStore';
 import routes from '../../../routes';
 
 import { renderToString } from 'react-dom/server';
-let template = require('./index.html.ejs');
+const template = require('./index.html.ejs');
 
 import { getState } from './index-state';
 
 export let register = function (server, options, next) {
     let handler = async function (request, reply) {
-        let path = request.url.path;
+        const path = request.url.path;
         const state = getState('screen1');
         const memoryHistory = createMemoryHistory(path);
         const store = configureStore()();
         const history = syncHistoryWithStore(memoryHistory, store);
         match({ history, routes, location: path }, (error, redirectLocation, renderProps) => {
             if (error) {
-                /* eslint no-console: "off" */
                 console.error(error);
                 reply(Boom.badImplementation());
             } else if (redirectLocation) {
@@ -39,13 +38,11 @@ export let register = function (server, options, next) {
                         state: JSON.stringify(state)
                     });
                 } catch (error) {
-                    /* eslint no-console: "off" */
                     console.error('error during render', error);
                     reply(Boom.badImplementation());
                 }
                 reply(page);
             } else {
-                /* eslint no-console: "off" */
                 console.error('no such page');
                 reply(Boom.notFound());
             }
