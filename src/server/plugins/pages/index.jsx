@@ -1,4 +1,5 @@
 /* eslint no-console: ["error", { allow: ["log", "error"] }] */
+/* eslint consistent-return: "off" */
 import Boom from 'boom';
 import { RouterContext, createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -25,10 +26,14 @@ export let register = function (server, options, next) {
         match({ history, routes, location: path }, (error, redirectLocation, renderProps) => {
             if (error) {
                 console.error(error);
-                reply(Boom.badImplementation());
-            } else if (redirectLocation) {
-                reply().redirect(redirectLocation.pathname + redirectLocation.search);
-            } else if (renderProps) {
+                return reply(Boom.badImplementation());
+            }
+
+            if (redirectLocation) {
+                return reply().redirect(redirectLocation.pathname + redirectLocation.search);
+            }
+
+            if (renderProps) {
                 let page;
                 const appCode = (
                     <Provider store={ store }>
@@ -42,12 +47,14 @@ export let register = function (server, options, next) {
                         state: JSON.stringify(store.getState())
                     });
                 } catch (error) {
-                    console.error('error during render', error);
+                    console.error('error during render process', error);
                     reply(Boom.badImplementation());
                 }
                 reply(page);
             } else {
-                console.error('no such page');
+                // if you are here,
+                // this means routes do not contain default route
+                console.error(`No page found for path ${path}`);
                 reply(Boom.notFound());
             }
         });
