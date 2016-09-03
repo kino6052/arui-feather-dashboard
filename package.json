@@ -12,6 +12,7 @@
     "postdocker-build": "docker push docker.moscow.alfaintra.net/$npm_package_name:$npm_package_version",
     "postinstall": "cp ./node_modules/arui-feather/.eslintrc ./",
     "start": "node start",
+    "watch": "HOT_LOADER=1 npm start",
     "build": "NODE_ENV=production node build",
     "build-static": "NODE_ENV=production node build-static",
     "lint-css": "stylelint ./src/**/*.css",
