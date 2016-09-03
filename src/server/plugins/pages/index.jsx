@@ -3,20 +3,24 @@ import Boom from 'boom';
 import { RouterContext, createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
+import config from 'config';
 import configureStore from '../../../configureStore';
 import routes from '../../../routes';
 
 import { renderToString } from 'react-dom/server';
 const template = require('./index.html.ejs');
-
-import { getState } from './index-state';
+const defaultState = {
+    app: {
+        settings: config.get('client'),
+        error: false
+    }
+};
 
 export let register = function (server, options, next) {
     let handler = async function (request, reply) {
         const path = request.url.path;
-        const state = getState('screen1');
         const memoryHistory = createMemoryHistory(path);
-        const store = configureStore()();
+        const store = configureStore(false)(defaultState);
         const history = syncHistoryWithStore(memoryHistory, store);
         match({ history, routes, location: path }, (error, redirectLocation, renderProps) => {
             if (error) {
@@ -27,15 +31,15 @@ export let register = function (server, options, next) {
             } else if (renderProps) {
                 let page;
                 const appCode = (
-                    <Provider store={store}>
-                        <RouterContext {...renderProps} />
+                    <Provider store={ store }>
+                        <RouterContext { ...renderProps } />
                     </Provider>
                 );
                 try {
                     page = template({
                         staticAssets: options.staticAssets,
                         content: renderToString(appCode),
-                        state: JSON.stringify(state)
+                        state: JSON.stringify(store.getState())
                     });
                 } catch (error) {
                     console.error('error during render', error);
