@@ -11,6 +11,7 @@ class ScreenPage extends React.Component {
         pageKey: PropTypes.string,
         routeParams: PropTypes.any
     };
+
     render() {
         const { pageKey, routeParams } = this.props;
         const defaultKey = routeParams
