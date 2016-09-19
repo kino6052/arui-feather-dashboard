@@ -1,20 +1,14 @@
-import React, { PropTypes } from 'react';
-import Paragraph from 'arui-feather/src/paragraph/paragraph';
-import Link from 'arui-feather/src/link/link';
+import React from 'react';
+import ErrorPage from 'arui-feather/src/error-page/error-page';
 
 export default class Info404 extends React.Component {
-    static propTypes = {
-        message: PropTypes.string
-    };
-    static defaultProps = {
-        message: 'Такой страницы не существует :('
-    };
     render() {
         return (
-            <div>
-                <Paragraph>{ this.props.message }</Paragraph>
-                <Link url='/' text='На главную страницу' />
-            </div>
+            <ErrorPage
+                returnUrl='/'
+                title='404'
+                text='Такой страницы не существует :('
+            />
         );
     }
 }
