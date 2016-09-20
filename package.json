@@ -10,9 +10,9 @@
     "predocker-build": "npm run provide-ssh && npm run extrapackage",
     "docker-build": "docker build -t docker.moscow.alfaintra.net/$npm_package_name:$npm_package_version .",
     "postdocker-build": "docker push docker.moscow.alfaintra.net/$npm_package_name:$npm_package_version",
-
     "postinstall": "cp ./node_modules/arui-feather/.eslintrc ./",
     "start": "node start",
+    "watch": "HOT_LOADER=1 npm start",
     "build": "NODE_ENV=production node build",
     "build-static": "NODE_ENV=production node build-static",
     "lint-css": "stylelint ./src/**/*.css",
@@ -93,11 +93,14 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
+    "boom": "^4.0.0",
     "hapi": "^13.2.2",
     "node-noop": "^1.0.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.1",
+    "react-router": "^2.7.0",
+    "react-router-redux": "^4.0.5",
     "redux": "^3.3.1"
   }
 }

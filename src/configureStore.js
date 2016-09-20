@@ -1,24 +1,24 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import appReducer from './reducers/app-reducer';
-
 import thunk from 'redux-thunk';
 
-import historyPlugin from './plugins/history';
+const reducers = {
+    routing: routerReducer,
+    app: appReducer
+};
 
-const MIDDLEWARES = [
-    thunk
-];
-
-const PLUGINS = [
-    historyPlugin
+const middlewares = [
+    routerMiddleware(browserHistory), thunk
 ];
 
 function configureStore(isHotLoaderRequired = false) {
-    const middleware = applyMiddleware(...MIDDLEWARES);
-
-    return state => {
-        const store = createStore(appReducer, state, middleware);
-        PLUGINS.forEach(plugin => plugin(store));
+    return (initState = {}) => {
+        const store = createStore(
+            combineReducers(reducers),
+            initState,
+            applyMiddleware(...middlewares));
 
         if (isHotLoaderRequired && module.hot) {
             module.hot.accept('./reducers/app-reducer', () => {
