@@ -23,7 +23,7 @@ module.exports = function (config) {
             require('karma-chai'),
             require('karma-chai-spies'),
             require('karma-chai-dom'),
-            require('karma-jenkins-reporter'),
+            require('karma-junit-reporter'),
             require('karma-coverage')
         ],
         webpack: webpackConfig,
@@ -31,7 +31,7 @@ module.exports = function (config) {
             noInfo: true,
         },
         frameworks: ['mocha', 'chai-spies', 'chai-dom', 'chai'],
-        reporters: ['mocha', 'coverage', 'jenkins'],
+        reporters: ['mocha', 'coverage', 'junit'],
         preprocessors: {
             'tests.webpack.js': ['webpack', 'sourcemap'],
         },
@@ -47,6 +47,10 @@ module.exports = function (config) {
                     lines: 40,
                 },
             },
+        },
+        junitReporter: {
+            outputFile: 'test-results.xml',
+            useBrowserName: false
         },
         singleRun: true
     };
