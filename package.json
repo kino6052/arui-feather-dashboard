@@ -14,7 +14,10 @@
     "start": "node start",
     "watch": "HOT_LOADER=1 npm start",
     "build": "NODE_ENV=production node build",
-    "build-static": "NODE_ENV=production node build-static",
+    "build-static-default": "NODE_ENV=production webpack --config webpack.static.config.js",
+    "build-static-ssr": "SERVER_SIDE_RENDER=1 npm run build-static-default",
+    "build-static-csr": "CLIENT_SIDE_RENDER=1 npm run build-static-default",
+    "build-static": "SERVER_SIDE_RENDER=1 CLIENT_SIDE_RENDER=1 npm run build-static-default",
     "lint-css": "stylelint ./src/**/*.css",
     "lint-js": "eslint ./src/ --ext .js,.jsx",
     "lint": "npm run lint-css && npm run lint-js",
@@ -22,7 +25,7 @@
     "test": "npm run lint && npm run karma"
   },
   "devDependencies": {
-    "arui-feather": "^0.7.7",
+    "arui-feather": "^0.7.11",
     "autoprefixer": "^6.3.1",
     "babel-core": "^6.4.5",
     "babel-eslint": "^6.0.3",
@@ -87,6 +90,7 @@
     "redux-thunk": "^2.1.0",
     "respawn": "^2.3.0",
     "rimraf": "^2.5.2",
+    "static-site-generator-webpack-plugin": "^3.0.0",
     "style-loader": "^0.13.0",
     "stylelint": "^7.1.0",
     "url-loader": "^0.5.7",

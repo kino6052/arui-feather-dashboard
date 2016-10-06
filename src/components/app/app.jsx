@@ -1,21 +1,20 @@
-import FeatherComponent from 'arui-feather/src/feather/feather';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import { bindActionCreators } from 'redux';
 
+import FeatherComponent from 'arui-feather/src/feather/feather';
 import Page from 'arui-feather/src/page/page';
 import ErrorPage from 'arui-feather/src/error-page/error-page';
 import Header from 'arui-feather/src/header/header';
 import Footer from 'arui-feather/src/footer/footer';
 import Menu from 'arui-feather/src/menu/menu';
 import User from 'arui-feather/src/user/user';
-import { browserHistory } from 'react-router';
 
 import { screens } from '../../screen-const.js';
 import { changeScreen } from '../../actions/screen';
 
 import cn from 'arui-feather/src/cn';
 require('./app.css');
-
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
     state = state.app;
@@ -53,6 +52,7 @@ class App extends FeatherComponent {
                 }
             }
         }));
+
         return (
             <Page
                 className={ cn }

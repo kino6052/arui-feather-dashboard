@@ -39,11 +39,3 @@ if (typeof window !== 'undefined') {
         }
     };
 }
-
-export function renderStatic(state) {
-    let store = configureStoreLocal(state);
-
-    return (
-        <Root store={ store } />
-    );
-}
