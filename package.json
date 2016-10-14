@@ -22,7 +22,7 @@
     "test": "npm run lint && npm run karma"
   },
   "devDependencies": {
-    "arui-feather": "git+ssh://git@git/ef/arui-feather.git#v0.7.0",
+    "arui-feather": "^0.7.7",
     "autoprefixer": "^6.3.1",
     "babel-core": "^6.4.5",
     "babel-eslint": "^6.0.3",
