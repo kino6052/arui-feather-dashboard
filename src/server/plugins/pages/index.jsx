@@ -44,7 +44,8 @@ export let register = function (server, options, next) {
                     page = template({
                         staticAssets: options.staticAssets,
                         content: renderToString(appCode),
-                        state: JSON.stringify(store.getState())
+                        state: JSON.stringify(store.getState()),
+                        rootPath: '/'
                     });
                 } catch (error) {
                     console.error('error during render process', error);
