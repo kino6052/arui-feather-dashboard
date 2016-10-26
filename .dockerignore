@@ -1,0 +1,9 @@
+node_modules
+*.swp
+*.swo
+.idea/
+.git
+.build
+
+.awcache
+coverage/
