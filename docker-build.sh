@@ -20,15 +20,15 @@ __BUILD_TIME=$(date +%s)
 
 # We don't need all the layers that were generated during build phase. So we just squash everything into one layer.
 # Using docker-export/docker-import.
-docker run -d $buildImage tail -f /src/package.json
+docker run -d $buildImage tail -f /src/package.json # `docker export` needs running container
 buildContainerId=`docker ps | grep $buildImage | awk '{print $1}'`
 echo "Container id running $buildContainerId"
 echo "Export docker filesystem"
 
-docker export $buildContainerId > $imageDump
+docker export $buildContainerId > $imageDump # actually, make a dump of the whole container fs - rtfm
 __EXPORT_TIME=$(date +%s)
 
-cat $imageDump | docker import --change "WORKDIR /src" - $image
+cat $imageDump | docker import --change "WORKDIR /src" - $image # create a new image(the "Run image") from the dump
 rm -rf $imageDump
 
 __IMPORT_TIME=$(date +%s)
