@@ -5,7 +5,7 @@ import { RouterContext, createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import config from 'config';
-import configureStore from '../../../configureStore';
+import configureStore from '../../../configure-store';
 import routes from '../../../routes';
 
 import { renderToString } from 'react-dom/server';

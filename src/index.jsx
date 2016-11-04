@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Root from './root';
-import configureStore from './configureStore';
+import configureStore from './configure-store';
 import { AppContainer } from 'react-hot-loader';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
