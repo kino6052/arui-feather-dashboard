@@ -23,7 +23,7 @@ if (typeof window !== 'undefined') {
             );
 
             if (module.hot) {
-                module.hot.accept(['./root', './configureStore'], () => {
+                module.hot.accept(['./root', './configure-store'], () => {
                     let NextAppAssignments = require('./root').default;
 
                     ReactDOM.render(
