@@ -8,6 +8,7 @@ module.exports = {
     },
     devtools: true,
     client: {
-        authPage: '/'
+        authPage: '/',
+        contextRoot: ''
     }
 };
