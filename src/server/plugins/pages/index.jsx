@@ -19,11 +19,12 @@ const defaultState = {
 
 export let register = function (server, options, next) {
     let handler = async function (request, reply) {
+        const contextRoot = config.get('client.contextRoot');
         const path = request.url.path;
         const memoryHistory = createMemoryHistory(path);
         const store = configureStore(false)(defaultState);
         const history = syncHistoryWithStore(memoryHistory, store);
-        match({ history, routes, location: path }, (error, redirectLocation, renderProps) => {
+        match({ history, routes, location: path, basename: contextRoot }, (error, redirectLocation, renderProps) => {
             if (error) {
                 console.error(error);
                 return reply(Boom.badImplementation());
@@ -45,7 +46,7 @@ export let register = function (server, options, next) {
                         staticAssets: options.staticAssets,
                         content: renderToString(appCode),
                         state: JSON.stringify(store.getState()),
-                        rootPath: '/'
+                        rootPath: `${contextRoot}/`
                     });
                 } catch (error) {
                     console.error('error during render process', error);
