@@ -12,9 +12,9 @@ import { renderToString } from 'react-dom/server';
 const template = require('./index.html.ejs');
 const defaultState = {
     app: {
-        settings: config.get('client'),
         error: false
-    }
+    },
+    settings: config.get('client')
 };
 
 export let register = function (server, options, next) {

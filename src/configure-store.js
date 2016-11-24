@@ -2,11 +2,13 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import appReducer from './reducers/app-reducer';
+import settingsReducer from './reducers/settings-reducer';
 import thunk from 'redux-thunk';
 
 const reducers = {
     routing: routerReducer,
-    app: appReducer
+    app: appReducer,
+    settings: settingsReducer
 };
 
 const middlewares = [
