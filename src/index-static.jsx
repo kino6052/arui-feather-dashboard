@@ -30,7 +30,7 @@ if (typeof window !== 'undefined') {
 export default (locals, callback) => {
     const path = locals.path;
     const memoryHistory = createMemoryHistory(path);
-    const store = configureStore(false)(locals.state);
+    const store = configureStore(false)(locals.state, memoryHistory);
     const history = syncHistoryWithStore(memoryHistory, store);
 
     match({ history, routes, location: path }, (error, redirectLocation, renderProps) => {

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 
 import FeatherComponent from 'arui-feather/src/feather/feather';
@@ -17,10 +16,9 @@ import cn from 'arui-feather/src/cn';
 require('./app.css');
 
 function mapStateToProps(state) {
-    state = state.app;
     return {
-        screen: state.screen,
-        error: state.error,
+        screen: state.app.screen,
+        error: state.app.error,
         authPage: state.settings && state.settings.authPage
     };
 }
@@ -34,7 +32,7 @@ function mapDispatchToProps(dispatch) {
 class App extends FeatherComponent {
     handleMenuClick(evt, screenInd) {
         evt.preventDefault();
-        browserHistory.push(`/screen/${screenInd}`);
+        this.props.changeScreen(screenInd);
     }
 
     render(cn) {

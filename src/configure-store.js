@@ -1,30 +1,22 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-import { routerMiddleware, routerReducer } from 'react-router-redux';
-import { browserHistory } from 'react-router';
-import appReducer from './reducers/app-reducer';
-import settingsReducer from './reducers/settings-reducer';
+import { applyMiddleware, createStore } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-const reducers = {
-    routing: routerReducer,
-    app: appReducer,
-    settings: settingsReducer
-};
-
-const middlewares = [
-    routerMiddleware(browserHistory), thunk
-];
+import reducers from './reducers';
 
 function configureStore(isHotLoaderRequired = false) {
-    return (initState = {}) => {
+    return (initState = {}, history = null) => {
         const store = createStore(
-            combineReducers(reducers),
+            reducers,
             initState,
-            applyMiddleware(...middlewares));
+            applyMiddleware(
+                routerMiddleware(history),
+                thunk
+            ));
 
         if (isHotLoaderRequired && module.hot) {
             module.hot.accept('./reducers/app-reducer', () => {
-                store.replaceReducer(require('./reducers/app-reducer').default);
+                store.replaceReducer(require('./reducers').default);
             });
         }
 

@@ -22,7 +22,7 @@ export let register = function (server, options, next) {
         const contextRoot = config.get('client.contextRoot');
         const path = request.url.path;
         const memoryHistory = createMemoryHistory(path);
-        const store = configureStore(false)(defaultState);
+        const store = configureStore(false)(defaultState, memoryHistory);
         const history = syncHistoryWithStore(memoryHistory, store);
         match({ history, routes, location: path, basename: contextRoot }, (error, redirectLocation, renderProps) => {
             if (error) {

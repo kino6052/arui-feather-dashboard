@@ -1,8 +1,5 @@
-import { CHANGE_SCREEN } from './types';
+import { push } from 'react-router-redux';
 
 export function changeScreen(screen) {
-    return {
-        type: CHANGE_SCREEN,
-        screen
-    };
+    return push(`/screen/${screen}`);
 }
