@@ -1,0 +1,12 @@
+FROM docker.moscow.alfaintra.net/node:6.9.4
+MAINTAINER alfabank
+
+ADD ssh /root/.ssh/
+ADD tmp-package.json /tmp/package.json
+RUN cd /tmp && npm i --quiet --no-progress --unsafe-perm --registry http://mvn/artifactory/api/npm/npm
+RUN mkdir -p /src && mv /tmp/node_modules /src
+WORKDIR /src
+ADD . /src
+RUN npm run build
+# clean some shit
+RUN npm prune --production

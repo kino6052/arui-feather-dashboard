@@ -1,9 +1,9 @@
-node_modules
 *.swp
 *.swo
 .idea/
 .git
-.build
+test-results.xml
+TESTS-PhantomJS_*.xml
 
 .awcache
 coverage/
