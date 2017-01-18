@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useRouterHistory } from 'react-router';
+import { createHistory } from 'history';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import Root from './root';
 import configureStore from './configure-store';
@@ -7,17 +10,25 @@ import { AppContainer } from 'react-hot-loader';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const HOT_LOADER = !!process.HOT_LOADER && !IS_PRODUCTION;
+const CAN_USE_DOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 let configureStoreLocal = configureStore(HOT_LOADER);
 
 if (typeof window !== 'undefined') {
     window.__main = state => {
-        let store = configureStoreLocal(state);
+        let history = CAN_USE_DOM
+            ? useRouterHistory(createHistory)({
+                basename: (state.settings && state.settings.contextRoot) || ''
+            })
+            : null;
+
+        let store = configureStoreLocal(state, history);
+        history = syncHistoryWithStore(history, store);
 
         if (HOT_LOADER) {
             ReactDOM.render(
                 <AppContainer>
-                    <Root store={ store } />
+                    <Root store={ store } history={ history } />
                 </AppContainer>,
                 document.getElementById('react-app')
             );
@@ -28,14 +39,14 @@ if (typeof window !== 'undefined') {
 
                     ReactDOM.render(
                         <AppContainer>
-                            <NextAppAssignments store={ store } />
+                            <NextAppAssignments store={ store } history={ history } />
                         </AppContainer>,
                         document.getElementById('react-app')
                     );
                 });
             }
         } else {
-            ReactDOM.render(<Root store={ store } />, document.getElementById('react-app'));
+            ReactDOM.render(<Root store={ store } history={ history } />, document.getElementById('react-app'));
         }
     };
 }
