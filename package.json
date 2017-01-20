@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "extrapackage": "npm i jq-cli-wrapper && cat package.json | jq 'setpath([ \"version\"]; \"42.0.0\")' > tmp-package.json",
+    "extrapackage": "node ./prepare-build-package.js",
     "predocker-build": "npm run extrapackage",
     "docker-build": "./docker-build.sh $npm_package_name $npm_package_version",
     "postdocker-build": "docker push docker.moscow.alfaintra.net/$npm_package_name:$npm_package_version",
