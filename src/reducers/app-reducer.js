@@ -1,5 +1,3 @@
-import { CHANGE_SCREEN } from '../actions/types';
-
-export default function appReducer(state = {}, action) {
+export default function appReducer(state = {}) {
     return state;
 }
