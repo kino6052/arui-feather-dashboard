@@ -46,7 +46,7 @@ backendCompiler.plugin('done', () => {
         if (!monitor) {
             monitor = respawn(['node', '--harmony', './.build/server.js'], {
                 cwd: '.',
-                maxRestarts: -1,
+                maxRestarts: 1,
                 sleep: 100,
                 kill: 1000,
                 stdio: [
