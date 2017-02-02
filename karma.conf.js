@@ -13,10 +13,11 @@ module.exports = function (config) {
     });
 
     var cfg = {
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS'],
         plugins: [
             require('karma-webpack'),
             require('karma-chrome-launcher'),
+            require('karma-phantomjs-launcher'),
             require('karma-sourcemap-loader'),
             require('karma-mocha'),
             require('karma-mocha-reporter'),
