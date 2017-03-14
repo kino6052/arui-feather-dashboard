@@ -23,7 +23,7 @@
     "test": "npm run lint && npm run karma"
   },
   "devDependencies": {
-    "arui-presets": "^0.0.6",
+    "arui-presets": "^1.0.0",
     "autoprefixer": "^6.3.1",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
@@ -85,7 +85,7 @@
     "webpack-postcss-tools": "^1.1.1"
   },
   "dependencies": {
-    "arui-feather": "^1.0.2",
+    "arui-feather": "^2.0.0",
     "babel-polyfill": "^6.7.4",
     "boom": "^4.0.0",
     "config": "^1.19.0",
