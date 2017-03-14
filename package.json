@@ -7,7 +7,6 @@
     "predocker-build": "npm run extrapackage",
     "docker-build": "./docker-build.sh $npm_package_name $npm_package_version",
     "postdocker-build": "docker push docker.moscow.alfaintra.net/$npm_package_name:$npm_package_version",
-    "postinstall": "cp ./node_modules/arui-feather/.eslintrc ./",
     "start": "node ./start",
     "start-frontend": "node ./start-frontend",
     "start-backend": "node ./start-backend",
@@ -24,6 +23,7 @@
     "test": "npm run lint && npm run karma"
   },
   "devDependencies": {
+    "arui-presets": "^0.0.6",
     "autoprefixer": "^6.3.1",
     "babel-core": "^6.4.5",
     "babel-eslint": "^6.0.3",
@@ -92,7 +92,7 @@
     "webpack-postcss-tools": "^1.1.1"
   },
   "dependencies": {
-    "arui-feather": "^0.11.1",
+    "arui-feather": "^1.0.2",
     "babel-polyfill": "^6.7.4",
     "boom": "^4.0.0",
     "config": "^1.19.0",
