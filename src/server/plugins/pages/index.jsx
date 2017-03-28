@@ -31,7 +31,7 @@ export let register = function (server, options, next) {
             }
 
             if (redirectLocation) {
-                return reply().redirect(redirectLocation.pathname + redirectLocation.search);
+                return reply().redirect(contextRoot + redirectLocation.pathname + redirectLocation.search);
             }
 
             if (renderProps) {
