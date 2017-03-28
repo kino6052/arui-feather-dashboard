@@ -4,12 +4,19 @@ import AppContent from 'arui-feather/src/app-content/app-content';
 import Heading from 'arui-feather/src/heading/heading';
 import Paragraph from 'arui-feather/src/paragraph/paragraph';
 
-import { screens } from '../../screen-const.js';
+import screens from '../../screen-const';
 
 class ScreenPage extends React.Component {
     static propTypes = {
         pageKey: PropTypes.string,
-        routeParams: PropTypes.any
+        routeParams: PropTypes.shape({
+            screenId: PropTypes.string.isRequired
+        })
+    };
+
+    static defaultProps = {
+        pageKey: null,
+        routeParams: null
     };
 
     render() {

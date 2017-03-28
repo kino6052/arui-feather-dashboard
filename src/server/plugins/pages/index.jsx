@@ -1,5 +1,6 @@
 /* eslint no-console: ["error", { allow: ["log", "error"] }] */
 /* eslint consistent-return: "off" */
+import { renderToString } from 'react-dom/server';
 import Boom from 'boom';
 import { RouterContext, createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -8,8 +9,8 @@ import config from 'config';
 import configureStore from '../../../configure-store';
 import routes from '../../../routes';
 
-import { renderToString } from 'react-dom/server';
 const template = require('./index.html.ejs');
+
 const defaultState = {
     app: {
         error: false
@@ -17,8 +18,8 @@ const defaultState = {
     settings: config.get('client')
 };
 
-export let register = function (server, options, next) {
-    let handler = async function (request, reply) {
+export const register = (server, options, next) => {
+    let handler = async (request, reply) => {
         const contextRoot = config.get('client.contextRoot');
         const path = request.url.path;
         const memoryHistory = createMemoryHistory(path);

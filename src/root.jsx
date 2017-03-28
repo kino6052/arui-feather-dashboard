@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
+
 import routes from './routes';
 
 const propTypes = {
@@ -8,14 +9,17 @@ const propTypes = {
     history: PropTypes.object
 };
 
-const Root = ({ store, history }) => {
-    return (
-        <Provider store={ store }>
-            <Router key={ Date.now() } history={ history } routes={ routes } />
-        </Provider>
-    );
+const defaultProps = {
+    history: null
 };
 
+const Root = ({ store, history }) => (
+    <Provider store={ store }>
+        <Router key={ Date.now() } history={ history } routes={ routes } />
+    </Provider>
+);
+
 Root.propTypes = propTypes;
+Root.defaultProps = defaultProps;
 
 export default Root;

@@ -1,5 +1,5 @@
 import { changeScreen } from '../actions/screen';
-import { screens } from '../screen-const.js';
+import { screens } from '../screen-const';
 
 function findScreenByPathname(pathname) {
     let screenKey = Object.keys(screens).find(key => screens[key].path === pathname);
@@ -38,7 +38,7 @@ export default function historyPlugin(store) {
         }
     });
 
-    window.addEventListener('popstate', function () {
+    window.addEventListener('popstate', () => {
         let nextScreen = findScreenByPathname(window.location.pathname);
         if (nextScreen) {
             isStateChangeTriggeredByRoute = true;
