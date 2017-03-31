@@ -1,12 +1,14 @@
+/* eslint-disable global-require */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useRouterHistory } from 'react-router';
 import { createHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { AppContainer } from 'react-hot-loader';
 
 import Root from './root';
 import configureStore from './configure-store';
-import { AppContainer } from 'react-hot-loader';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const HOT_LOADER = !!process.HOT_LOADER && !IS_PRODUCTION;
@@ -15,7 +17,8 @@ const CAN_USE_DOM = !!(typeof window !== 'undefined' && window.document && windo
 let configureStoreLocal = configureStore(HOT_LOADER);
 
 if (typeof window !== 'undefined') {
-    window.__main = state => {
+    // eslint-disable-next-line no-underscore-dangle
+    window.__main = (state) => {
         let history = CAN_USE_DOM
             ? useRouterHistory(createHistory)({
                 basename: (state.settings && state.settings.contextRoot) || ''

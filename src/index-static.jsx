@@ -17,6 +17,7 @@ const CLIENT_SIDE_RENDER = process.env.CLIENT_SIDE_RENDER;
 
 // Client side render (optional):
 if (typeof window !== 'undefined') {
+    // eslint-disable-next-line no-underscore-dangle
     window.__main = (state) => {
         if (CLIENT_SIDE_RENDER) {
             let store = configureStore(false)(state);

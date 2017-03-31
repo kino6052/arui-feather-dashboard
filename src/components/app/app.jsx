@@ -8,12 +8,12 @@ import Header from 'arui-feather/src/header/header';
 import Footer from 'arui-feather/src/footer/footer';
 import Menu from 'arui-feather/src/menu/menu';
 import User from 'arui-feather/src/user/user';
+import cn from 'arui-feather/src/cn';
 
-import { screens } from '../../screen-const.js';
+import screens from '../../screen-const';
 import { changeScreen } from '../../actions/screen';
 
-import cn from 'arui-feather/src/cn';
-require('./app.css');
+import './app.css';
 
 function mapStateToProps(state) {
     return {
@@ -46,7 +46,7 @@ class App extends FeatherComponent {
             props: {
                 url: data.path,
                 onClick: (evt) => {
-                    this.handleMenuClick(evt, ++ind);
+                    this.handleMenuClick(evt, ind + 1);
                 }
             }
         }));

@@ -1,11 +1,10 @@
-export let register = function (server, options, next) {
-    let handler = function (request, reply) {
-        return reply.proxy({
+export const register = (server, options, next) => {
+    const handler = (request, reply) =>
+        reply.proxy({
             host: options.host,
             port: options.port,
             protocol: 'http'
         });
-    };
 
     server.route({
         method: 'GET',

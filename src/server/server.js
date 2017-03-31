@@ -33,12 +33,12 @@ server.connection({
     port: config.get('server.port')
 });
 
-server.register(plugins, function (error) {
+server.register(plugins, (error) => {
     if (error) {
         throw error;
     }
 
-    server.start(error => {
+    server.start((error) => {
         if (error) {
             console.error(`Server start failed: ${error.toString()}`);
             throw error;

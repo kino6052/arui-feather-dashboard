@@ -1,4 +1,4 @@
-export const screens = [
+export default [
     {
         name: 'SCREEN_1',
         path: '/',

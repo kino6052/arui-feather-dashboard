@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 import { applyMiddleware, createStore } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';

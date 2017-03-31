@@ -1,6 +1,6 @@
 const path = require('path');
 
-export let register = function (server, options, next) {
+export const register = (server, options, next) => {
     server.route({
         method: 'GET',
         path: '/assets/{resource}',
