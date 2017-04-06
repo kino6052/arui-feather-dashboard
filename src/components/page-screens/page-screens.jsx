@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
-import AppTitle from 'arui-feather/src/app-title/app-title';
-import AppContent from 'arui-feather/src/app-content/app-content';
-import Heading from 'arui-feather/src/heading/heading';
-import Paragraph from 'arui-feather/src/paragraph/paragraph';
+import { PropTypes, Component } from 'react';
+import AppTitle from 'arui-feather/app-title';
+import AppContent from 'arui-feather/app-content';
+import Heading from 'arui-feather/heading';
+import Paragraph from 'arui-feather/paragraph';
 
 import screens from '../../screen-const';
 
-class ScreenPage extends React.Component {
+class ScreenPage extends Component {
     static propTypes = {
         pageKey: PropTypes.string,
         routeParams: PropTypes.shape({

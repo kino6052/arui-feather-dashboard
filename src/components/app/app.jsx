@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Component } from 'react';
 
-import FeatherComponent from 'arui-feather/src/feather/feather';
-import Page from 'arui-feather/src/page/page';
-import ErrorPage from 'arui-feather/src/error-page/error-page';
-import Header from 'arui-feather/src/header/header';
-import Footer from 'arui-feather/src/footer/footer';
-import Menu from 'arui-feather/src/menu/menu';
-import User from 'arui-feather/src/user/user';
-import cn from 'arui-feather/src/cn';
+import Page from 'arui-feather/page';
+import ErrorPage from 'arui-feather/error-page';
+import Header from 'arui-feather/header';
+import Footer from 'arui-feather/footer';
+import Menu from 'arui-feather/menu';
+import User from 'arui-feather/user';
+import cn from 'arui-feather/cn';
 
 import screens from '../../screen-const';
 import { changeScreen } from '../../actions/screen';
@@ -29,7 +29,7 @@ function mapDispatchToProps(dispatch) {
 
 @connect(mapStateToProps, mapDispatchToProps)
 @cn('app')
-class App extends FeatherComponent {
+class App extends Component {
     handleMenuClick(evt, screenInd) {
         evt.preventDefault();
         this.props.changeScreen(screenInd);

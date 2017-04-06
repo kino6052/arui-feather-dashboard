@@ -1,4 +1,4 @@
-require('./node_modules/arui-feather/src/polyfills');
+require('./node_modules/arui-feather/polyfills');
 
-var context = require.context('./src/', true, /\-test\.jsx$/);
+var context = require.context('./src/', true, /-test\.jsx$/);
 context.keys().forEach(context);
