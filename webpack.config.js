@@ -1,63 +1,81 @@
 const path = require('path');
 const config = require('config');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
+const merge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PROXY_ASSETS = config.get('proxyAssets');
 const ASSETS_PATH = './assets/';
 const BUILD_PATH = './.build/';
-const WEBPACK_CONFIG_TEMPLATE = require('arui-feather/webpack.config.template.js');
-const WEBPACK_CONFIG_TEMPLATE_PRODUCTION = require('arui-feather/webpack.config.template.production.js');
-const WEBPACK_CONFIG_TEMPLATE_DEVELOPMENT = require('arui-feather/webpack.config.template.development.js');
+const ARUI_TEMPLATE = require('arui-presets/webpack.base');
+const ARUI_DEV_TEMPLATE = require('arui-presets/webpack.development');
+const ARUI_PROD_TEMPLATE = require('arui-presets/webpack.production');
 
 const IS_PRODUCTION = (process.env.NODE_ENV === 'production');
 
-var webpackConfig = Object.assign(
+const UNUSED_ICONS = [
+    // new webpack.NormalModuleReplacementPlugin(/icon_action_alfa-on-color\.css$/, 'node-noop'),
+    // new webpack.NormalModuleReplacementPlugin(/icon_action_alfa-on-colored\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_action_alfa-on-white\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_bank_alfa-on-color\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_bank_alfa-on-colored\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_bank_alfa-on-white\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_card_alfa-on-color\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_card_alfa-on-colored\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_card_alfa-on-white\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_category_alfa-on-color\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_currency_alfa-on-color\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_currency_alfa-on-white\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_format_alfa-on-color\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_format_alfa-on-white\.css$/, 'node-noop'),
+    // new webpack.NormalModuleReplacementPlugin(/icon_network_alfa-on-color\.css$/, 'node-noop'),
+    // new webpack.NormalModuleReplacementPlugin(/icon_network_alfa-on-white\.css$/, 'node-noop'),
+    // new webpack.NormalModuleReplacementPlugin(/icon_tool_alfa-on-color\.css$/, 'node-noop'),
+    // new webpack.NormalModuleReplacementPlugin(/icon_tool_alfa-on-white\.css$/, 'node-noop'),
+    // new webpack.NormalModuleReplacementPlugin(/icon_user_alfa-on-color\.css$/, 'node-noop'),
+    new webpack.NormalModuleReplacementPlugin(/icon_user_alfa-on-white\.css$/, 'node-noop')
+];
+
+let webpackConfig = merge.smart(
+    ARUI_TEMPLATE,
     {
         entry: {
             index: [
-                './node_modules/arui-feather/src/polyfills.js',
+                './node_modules/arui-feather/polyfills.js',
                 './src/index.jsx'
             ]
         },
         output: {
             path: path.resolve(__dirname, BUILD_PATH),
-            publicPath: IS_PRODUCTION ? '.' : '//' + PROXY_ASSETS.host + ':' + PROXY_ASSETS.port + '/',
+            publicPath: IS_PRODUCTION ? '.' : 'http://' + PROXY_ASSETS.host + ':' + PROXY_ASSETS.port + '/',
             filename: ASSETS_PATH + '[name].js'
-        }
+        },
+        module: {
+            loaders: [
+                {
+                    test: /\.jsx?$/,
+                    loader: 'babel-loader'
+                }
+            ]
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                'process.HOT_LOADER': process.env.HOT_LOADER
+            }),
+            new CopyWebpackPlugin([
+                {
+                    from: path.resolve(__dirname, 'src/icons'),
+                    to: path.resolve(BUILD_PATH, ASSETS_PATH)
+                }
+            ]),
+            ...UNUSED_ICONS
+        ]
     },
-    WEBPACK_CONFIG_TEMPLATE
-);
-
-webpackConfig.plugins = Array.from(WEBPACK_CONFIG_TEMPLATE.plugins);
-webpackConfig.plugins.push(
-    new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        'process.HOT_LOADER': process.env.HOT_LOADER
-    })
-);
-
-webpackConfig.plugins.push(
-    new CopyWebpackPlugin([
-        {
-            from: path.resolve(__dirname, 'src/icons'),
-            to: path.resolve(BUILD_PATH, ASSETS_PATH)
-        }
-    ])
+    IS_PRODUCTION ? ARUI_PROD_TEMPLATE : ARUI_DEV_TEMPLATE
 );
 
 if (IS_PRODUCTION) {
-    webpackConfig.module.loaders.forEach(loader => {
-        var prodLoader = WEBPACK_CONFIG_TEMPLATE_PRODUCTION.module.loaders
-            .find(prodLoader => loader.test.toString() === prodLoader.test.toString());
-
-        if (prodLoader) {
-            Object.assign(loader, prodLoader);
-        }
-    });
-
     webpackConfig.module.loaders
         .filter(loader => loader.loader === 'url-loader')
         .forEach(loader => {
@@ -65,24 +83,6 @@ if (IS_PRODUCTION) {
                 loader.query.name = ASSETS_PATH + loader.query.name;
             }
         });
-
-    webpackConfig.plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            beautify: true,
-            sourceMap: false,
-            warnings: false
-        }),
-        new ExtractTextPlugin(ASSETS_PATH + '[name].css'),
-        new CompressionPlugin({
-            asset: '[file].gz',
-            algorithm: 'gzip',
-            regExp: /\.js$|\.css$|\.ttf$|\.svg$/,
-            threshold: 10240,
-            minRatio: 0.8
-        })
-    );
-} else {
-    Object.assign(webpackConfig, WEBPACK_CONFIG_TEMPLATE_DEVELOPMENT);
 }
 
 module.exports = webpackConfig;
