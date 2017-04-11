@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const WEBPACK_CONFIG_TEMPLATE = require('./node_modules/arui-feather/webpack.config.template.js');
+const WEBPACK_CONFIG_TEMPLATE = require('arui-presets/webpack.base');
 
 module.exports = function (config) {
     var webpackConfig = WEBPACK_CONFIG_TEMPLATE;
