@@ -51,7 +51,11 @@ const frontendServer = new WebpackDevServer(frontendCompiler, {
     },
     publicPath: webpackConfig.output.publicPath,
     headers: { 'X-Custom-Header': 'yes' },
-    stats: { colors: true }
+    disableHostCheck: true,
+    stats: { colors: true },
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    }
 });
 
 frontendServer.listen(PROXY_ASSETS.port, PROXY_ASSETS.host, () => {

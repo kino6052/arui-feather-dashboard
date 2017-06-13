@@ -1,12 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import Type from 'prop-types';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 
 import routes from './routes';
 
 const propTypes = {
-    store: PropTypes.object.isRequired,
-    history: PropTypes.object
+    store: Type.object.isRequired,
+    history: Type.object
 };
 
 const defaultProps = {
