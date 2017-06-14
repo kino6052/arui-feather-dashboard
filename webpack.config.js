@@ -13,29 +13,6 @@ const ARUI_PROD_TEMPLATE = require('arui-presets/webpack.production');
 
 const IS_PRODUCTION = (process.env.NODE_ENV === 'production');
 
-const UNUSED_ICONS = [
-    // new webpack.NormalModuleReplacementPlugin(/icon_action_alfa-on-color\.css$/, 'node-noop'),
-    // new webpack.NormalModuleReplacementPlugin(/icon_action_alfa-on-colored\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_action_alfa-on-white\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_bank_alfa-on-color\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_bank_alfa-on-colored\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_bank_alfa-on-white\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_card_alfa-on-color\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_card_alfa-on-colored\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_card_alfa-on-white\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_category_alfa-on-color\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_currency_alfa-on-color\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_currency_alfa-on-white\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_format_alfa-on-color\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_format_alfa-on-white\.css$/, 'node-noop'),
-    // new webpack.NormalModuleReplacementPlugin(/icon_network_alfa-on-color\.css$/, 'node-noop'),
-    // new webpack.NormalModuleReplacementPlugin(/icon_network_alfa-on-white\.css$/, 'node-noop'),
-    // new webpack.NormalModuleReplacementPlugin(/icon_tool_alfa-on-color\.css$/, 'node-noop'),
-    // new webpack.NormalModuleReplacementPlugin(/icon_tool_alfa-on-white\.css$/, 'node-noop'),
-    // new webpack.NormalModuleReplacementPlugin(/icon_user_alfa-on-color\.css$/, 'node-noop'),
-    new webpack.NormalModuleReplacementPlugin(/icon_user_alfa-on-white\.css$/, 'node-noop')
-];
-
 let webpackConfig = merge.smart(
     ARUI_TEMPLATE,
     {
@@ -68,8 +45,7 @@ let webpackConfig = merge.smart(
                     from: path.resolve(__dirname, 'src/icons'),
                     to: path.resolve(BUILD_PATH, ASSETS_PATH)
                 }
-            ]),
-            ...UNUSED_ICONS
+            ])
         ]
     },
     IS_PRODUCTION ? ARUI_PROD_TEMPLATE : ARUI_DEV_TEMPLATE

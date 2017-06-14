@@ -23,14 +23,14 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "arui-presets": "^1.0.0",
-    "autoprefixer": "^6.3.1",
+    "arui-presets": "^2.4.0",
     "chai": "^3.5.0",
     "chai-dom": "^1.4.0",
     "chai-spies": "^0.7.1",
     "copy-webpack-plugin": "^3.0.1",
     "ejs": "^2.4.2",
     "ejs-compiled-loader": "^2.1.1",
+    "eslint": "^3.19.0",
     "husky": "^0.13.3",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.4.2",
@@ -49,36 +49,42 @@
     "lint-staged": "^3.4.1",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^15.2.0",
-    "redux-devtools": "^3.1.1",
+    "redux-devtools": "^3.4.0",
     "respawn": "^2.3.0",
     "rimraf": "^2.5.2",
     "static-site-generator-webpack-plugin": "^3.0.0",
     "stylelint": "^7.1.0",
     "webpack": "^1.12.12",
-    "webpack-dev-server": "^1.14.1",
+    "webpack-dev-server": "^1.16.5",
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "arui-feather": "^3.0.0",
-    "babel-polyfill": "^6.7.4",
-    "boom": "^4.0.0",
-    "config": "^1.19.0",
+    "arui-feather": "^6.0.0",
+    "arui-private": "^0.3.0",
+    "babel-polyfill": "^6.23.0",
+    "boom": "^5.1.0",
+    "config": "^1.26.1",
     "h2o2": "^5.1.0",
     "hapi": "^13.2.2",
     "history": "^2.1.2",
     "inert": "^3.2.1",
     "node-noop": "^1.0.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-hot-loader": "3.0.0-beta.1",
-    "react-redux": "^4.4.1",
+    "react-redux": "^5.0.5",
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
-    "redux": "^3.3.1",
-    "redux-thunk": "^2.1.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["eslint", "npm run test"],
+    "concurrent": false,
+    "src/**/*.{js,jsx}": [
+      "eslint",
+      "test"
+    ],
     "*.css": "stylelint"
   }
 }
