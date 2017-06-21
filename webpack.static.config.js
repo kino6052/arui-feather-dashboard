@@ -1,10 +1,12 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+
 const webpack = require('webpack');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const state = require('./static/state.json');
 
 const WEBPACK_MAIN_CONFIG = require('./webpack.config.js');
 
-var webpackConfig = Object.assign({}, WEBPACK_MAIN_CONFIG, {
+let webpackConfig = Object.assign({}, WEBPACK_MAIN_CONFIG, {
     entry: {
         index: [
             './node_modules/arui-feather/src/polyfills.js',
@@ -35,7 +37,7 @@ webpackConfig.plugins.push(
     new StaticSiteGeneratorPlugin(
         'index',
         ['/screen/1'],
-        { state: state }
+        { state }
     )
 );
 

@@ -1,3 +1,5 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
@@ -20,6 +22,10 @@ let webpackConfig = merge.smart(
     ARUI_TEMPLATE,
     {
         target: 'node',
+        node: {
+            __filename: true,
+            __dirname: true
+        },
         entry: ['./src/server/server.js'],
         output: {
             path: path.resolve(__dirname, BUILD_PATH),

@@ -1,3 +1,6 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
 Error.stackTraceLimit = 30;
 
 const respawn = require('respawn');
@@ -20,7 +23,7 @@ const STATS_OPTIONS = {
     chunkOrigins: true
 };
 
-var lastHash = null;
+let lastHash = null;
 function backendCompilerCallback(error, stats) {
     if (error) {
         lastHash = null;
@@ -33,13 +36,13 @@ function backendCompilerCallback(error, stats) {
 
     if (stats.hash !== lastHash) {
         lastHash = stats.hash;
-        process.stdout.write(stats.toString(STATS_OPTIONS) + '\n');
+        process.stdout.write(`${stats.toString(STATS_OPTIONS)}\n`);
     }
 }
 
 backendCompiler.plugin('compile', () => console.log('Building server...'));
 
-var monitor;
+let monitor;
 backendCompiler.plugin('done', () => {
     try {
         console.log('Restarting server...');

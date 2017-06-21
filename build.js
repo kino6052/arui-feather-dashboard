@@ -1,3 +1,6 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
 const fs = require('fs');
 const webpack = require('webpack');
 const rimraf = require('rimraf');
@@ -29,7 +32,7 @@ const STATS_OPTIONS = {
 frontendCompiler.plugin('compile', () => console.log('Building frontend...'));
 backendCompiler.plugin('compile', () => console.log('Building server...'));
 
-frontendCompiler.run(function(error, stats) {
+frontendCompiler.run(function (error, stats) {
     if (error) {
         console.error(error.stack || error);
         if (error.details) {
@@ -38,9 +41,9 @@ frontendCompiler.run(function(error, stats) {
         process.exit(1);
     }
 
-    process.stdout.write(stats.toString(STATS_OPTIONS) + '\n');
+    process.stdout.write(`${stats.toString(STATS_OPTIONS)}\n`);
 
-    backendCompiler.run(function(error, stats) {
+    backendCompiler.run(function (error, stats) {
         if (error) {
             console.error(error.stack || error);
             if (error.details) {
@@ -49,6 +52,6 @@ frontendCompiler.run(function(error, stats) {
             process.exit(1);
         }
 
-        process.stdout.write(stats.toString(STATS_OPTIONS) + '\n');
+        process.stdout.write(`${stats.toString(STATS_OPTIONS)}\n`);
     });
 });

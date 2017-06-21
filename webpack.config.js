@@ -1,7 +1,11 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+
+const fs = require('fs');
 const path = require('path');
 const config = require('config');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PROXY_ASSETS = config.get('proxyAssets');
@@ -24,8 +28,8 @@ let webpackConfig = merge.smart(
         },
         output: {
             path: path.resolve(__dirname, BUILD_PATH),
-            publicPath: IS_PRODUCTION ? '.' : 'http://' + PROXY_ASSETS.host + ':' + PROXY_ASSETS.port + '/',
-            filename: ASSETS_PATH + '[name].js'
+            publicPath: IS_PRODUCTION ? '../' : `http://${PROXY_ASSETS.host}:${PROXY_ASSETS.port}/`,
+            filename: IS_PRODUCTION ? `${ASSETS_PATH}[name].[hash].js` : `${ASSETS_PATH}[name].js`
         },
         module: {
             loaders: [
@@ -52,13 +56,19 @@ let webpackConfig = merge.smart(
 );
 
 if (IS_PRODUCTION) {
-    webpackConfig.module.loaders
-        .filter(loader => loader.loader === 'url-loader')
-        .forEach(loader => {
-            if (loader.query && loader.query.name) {
-                loader.query.name = ASSETS_PATH + loader.query.name;
-            }
-        });
+    let extractTextPluginIndex =
+        webpackConfig.plugins.findIndex(plugin => plugin instanceof ExtractTextPlugin);
+    webpackConfig.plugins[extractTextPluginIndex] = new ExtractTextPlugin(`${ASSETS_PATH}[name].[hash].css`);
+    webpackConfig.plugins.push(
+        function () {
+            this.plugin('done', function (stats) {
+                fs.writeFileSync(
+                    path.join(__dirname, BUILD_PATH, 'hash.json'),
+                    JSON.stringify(stats.toJson().hash, null, 2)
+                );
+            });
+        }
+    );
 }
 
 module.exports = webpackConfig;

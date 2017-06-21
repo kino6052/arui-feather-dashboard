@@ -1,4 +1,3 @@
-'use strict';
 /**
  *  Создает файл tmp-package.json,
  *  который используется для установки зависимостей в build-контейнере.
@@ -18,11 +17,11 @@ function isTestDependency(dependency) {
 
 function removeTestDependensies(deps) {
     let result = {};
-    for (let key in deps) {
+    Object.keys(deps).forEach((key) => {
         if (!isTestDependency(key)) {
             result[key] = deps[key];
         }
-    }
+    });
 
     return result;
 }

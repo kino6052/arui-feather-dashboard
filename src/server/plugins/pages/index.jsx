@@ -45,6 +45,7 @@ export const register = (server, options, next) => {
                 try {
                     page = template({
                         staticAssets: options.staticAssets,
+                        assetsHash: options.assetsHash,
                         content: renderToString(appCode),
                         state: JSON.stringify(store.getState()),
                         rootPath: `${contextRoot}/`

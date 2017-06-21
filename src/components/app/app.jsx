@@ -58,7 +58,7 @@ class App extends Component {
                 className={ cn }
                 header={
                     <Header
-                        logo={ <Logo view='full' /> }
+                        logo={ <Logo view='full' theme='alfa-on-color' /> }
                         menu={ <Menu view='horizontal' content={ menuContent } /> }
                         user={ <User url='#' text='Михаил Фридман' /> }
                     />

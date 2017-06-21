@@ -1,3 +1,6 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
 Error.stackTraceLimit = 30;
 
 const config = require('config');
@@ -12,7 +15,7 @@ const PROXY_ASSETS = config.get('proxyAssets');
 webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((result, item) => {
     result[item] = [
         'webpack/hot/only-dev-server',
-        'webpack-dev-server/client?http://localhost:' + PROXY_ASSETS.port
+        `webpack-dev-server/client?http://localhost:${PROXY_ASSETS.port}`
     ];
 
     if (HOT_LOADER) {
@@ -27,7 +30,7 @@ webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((result, item) => 
 if (HOT_LOADER) {
     webpackConfig.module.loaders
         .filter(loader => loader.loader === 'babel')
-        .forEach(loader => {
+        .forEach((loader) => {
             if (loader.query && loader.query.plugins) {
                 loader.query.plugins = ['react-hot-loader/babel'].concat(loader.query.plugins);
             }
@@ -50,10 +53,10 @@ const frontendServer = new WebpackDevServer(frontendCompiler, {
         poll: 1000
     },
     publicPath: webpackConfig.output.publicPath,
-    headers: { 'X-Custom-Header': 'yes' },
     disableHostCheck: true,
     stats: { colors: true },
     headers: {
+        'X-Custom-Header': 'yes',
         'Access-Control-Allow-Origin': '*'
     }
 });

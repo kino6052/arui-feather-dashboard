@@ -12,9 +12,13 @@ import pluginStaticAssets from './plugins/static-assets';
 
 const PROXY_ASSETS = config.get('proxyAssets');
 
-let plugins = [
-    { register: pluginPageIndex, options: { staticAssets: !PROXY_ASSETS } }
-];
+let plugins = [{
+    register: pluginPageIndex,
+    options: {
+        staticAssets: !PROXY_ASSETS,
+        assetsHash: !PROXY_ASSETS && eval('require')('./hash.json') // eslint-disable-line
+    }
+}];
 
 if (PROXY_ASSETS) {
     plugins.push(
