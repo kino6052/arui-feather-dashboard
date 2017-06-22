@@ -1,18 +1,20 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint global-require: 0 */
+
 const path = require('path');
-const webpack = require('webpack');
 const WEBPACK_CONFIG_TEMPLATE = require('arui-presets/webpack.base');
 
 module.exports = function (config) {
-    var webpackConfig = WEBPACK_CONFIG_TEMPLATE;
+    let webpackConfig = WEBPACK_CONFIG_TEMPLATE;
     webpackConfig.devtool = 'inline-source-map';
 
     webpackConfig.module.loaders.push({
         test: /\.jsx$/,
         loader: 'isparta',
-        include: path.resolve('src'),
+        include: path.resolve('src')
     });
 
-    var cfg = {
+    let cfg = {
         browsers: ['PhantomJS'],
         plugins: [
             require('karma-webpack'),
@@ -29,12 +31,12 @@ module.exports = function (config) {
         ],
         webpack: webpackConfig,
         webpackServer: {
-            noInfo: true,
+            noInfo: true
         },
         frameworks: ['mocha', 'chai-spies', 'chai-dom', 'chai'],
         reporters: ['mocha', 'coverage', 'junit'],
         preprocessors: {
-            'tests.webpack.js': ['webpack', 'sourcemap'],
+            'tests.webpack.js': ['webpack', 'sourcemap']
         },
         files: [
             'tests.webpack.js'
@@ -45,9 +47,9 @@ module.exports = function (config) {
                     statements: 86,
                     branches: 80,
                     functions: 95,
-                    lines: 40,
-                },
-            },
+                    lines: 40
+                }
+            }
         },
         junitReporter: {
             outputFile: 'test-results.xml',

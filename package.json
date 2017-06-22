@@ -16,14 +16,14 @@
     "build-static-csr": "CLIENT_SIDE_RENDER=1 npm run build-static-default",
     "build-static": "SERVER_SIDE_RENDER=1 CLIENT_SIDE_RENDER=1 npm run build-static-default",
     "lint-css": "stylelint ./src/**/*.css",
-    "lint-js": "eslint ./src/ --ext .js,.jsx",
+    "lint-js": "eslint ./*.js ./src/ --ext .js,.jsx",
     "lint": "npm run lint-css && npm run lint-js",
     "karma": "karma start",
     "test": "npm run lint && npm run karma",
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "arui-presets": "^2.4.0",
+    "arui-presets": "^2.5.0",
     "chai": "^3.5.0",
     "chai-dom": "^1.4.0",
     "chai-spies": "^0.7.1",
@@ -31,6 +31,7 @@
     "ejs": "^2.4.2",
     "ejs-compiled-loader": "^2.1.1",
     "eslint": "^3.19.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "husky": "^0.13.3",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.4.2",
@@ -81,6 +82,9 @@
   },
   "lint-staged": {
     "concurrent": false,
+    "*.{js,jsx}": [
+      "eslint"
+    ],
     "src/**/*.{js,jsx}": [
       "eslint",
       "test"
