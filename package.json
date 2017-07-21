@@ -60,8 +60,8 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "arui-feather": "^6.0.0",
-    "arui-private": "^0.3.0",
+    "arui-feather": "^8.2.1",
+    "arui-private": "^1.1.3",
     "babel-polyfill": "^6.23.0",
     "boom": "^5.1.0",
     "config": "^1.26.1",

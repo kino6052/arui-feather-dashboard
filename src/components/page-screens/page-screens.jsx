@@ -1,9 +1,7 @@
 import { Component } from 'react';
 import Type from 'prop-types';
-import AppTitle from 'arui-feather/app-title';
-import AppContent from 'arui-feather/app-content';
-import Heading from 'arui-feather/heading';
-import Paragraph from 'arui-feather/paragraph';
+import Heading from 'arui-feather/heading/fantasy';
+import Paragraph from 'arui-feather/paragraph/fantasy';
 
 import screens from '../../screen-const';
 
@@ -28,12 +26,8 @@ class ScreenPage extends Component {
         const { about, title } = screens[pageKey || defaultKey];
         return (
             <div>
-                <AppTitle>
-                    <Heading>{ title }</Heading>
-                </AppTitle>
-                <AppContent>
-                    <Paragraph>{ about }</Paragraph>
-                </AppContent>
+                <Heading>{ title }</Heading>
+                <Paragraph>{ about }</Paragraph>
             </div>
         );
     }
