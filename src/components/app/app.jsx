@@ -3,13 +3,16 @@ import { bindActionCreators } from 'redux';
 import { Component } from 'react';
 import Type from 'prop-types';
 
-import Page from 'arui-feather/page';
-import ErrorPage from 'arui-feather/error-page';
-import Header from 'arui-feather/header';
-import Footer from 'arui-feather/footer';
-import Menu from 'arui-feather/menu';
-import User from 'arui-feather/user';
-import Logo from 'arui-private/logo';
+import Page from 'arui-private/page/fantasy';
+import ApplicationMenu from 'arui-private/application-menu/fantasy';
+import ApplicationMenuItem from 'arui-private/application-menu-item/fantasy';
+import ApplicationMenuGroup from 'arui-private/application-menu-group/fantasy';
+import Content from 'arui-private/content/fantasy';
+import ErrorPage from 'arui-private/error-page/fantasy';
+import Header from 'arui-private/header/fantasy';
+import Footer from 'arui-private/footer/fantasy';
+import Menu from 'arui-feather/menu/fantasy';
+import ThemeProvider from 'arui-feather/theme-provider';
 import cn from 'arui-feather/cn';
 
 import screens from '../../screen-const';
@@ -54,19 +57,41 @@ class App extends Component {
         }));
 
         return (
-            <Page
-                className={ cn }
-                header={
-                    <Header
-                        logo={ <Logo view='full' theme='alfa-on-color' /> }
-                        menu={ <Menu view='horizontal' content={ menuContent } /> }
-                        user={ <User url='#' text='Михаил Фридман' /> }
-                    />
-                }
-                footer={ <Footer /> }
-            >
-                { this.props.children }
-            </Page>
+            <ThemeProvider theme='alfa-on-white'>
+                <Page
+                    className={ cn }
+                    header={
+                        <Header
+                            menu={
+                                <ApplicationMenu>
+                                    <ApplicationMenuItem url='/screen/1'>
+                                        Экран 1
+                                    </ApplicationMenuItem>
+                                    <ApplicationMenuItem url='/screen/2'>
+                                        Экран 2
+                                    </ApplicationMenuItem>
+                                    <ApplicationMenuItem url='/screen/3'>
+                                        Экран 3
+                                    </ApplicationMenuItem>
+                                    <ApplicationMenuGroup title='Группа меню' url='#'>
+                                        <ApplicationMenuItem url='/screen/1'>
+                                            Экран 1
+                                        </ApplicationMenuItem>
+                                        <ApplicationMenuItem url='/screen/2'>
+                                            Экран 2
+                                        </ApplicationMenuItem>
+                                    </ApplicationMenuGroup>
+                                </ApplicationMenu>
+                            }
+                        />
+                    }
+                    footer={ <Footer /> }
+                >
+                        <Content theme='alfa-on-white'>
+                            { this.props.children }
+                        </Content>
+                </Page>
+            </ThemeProvider>
         );
     }
 
@@ -74,11 +99,6 @@ class App extends Component {
         return (
             <ErrorPage className={ cn } returnUrl={ this.props.authPage } header={ <Header /> } />
         );
-    }
-
-    handleMenuClick(event, screenIndex) {
-        event.preventDefault();
-        this.props.changeScreen(screenIndex);
     }
 }
 
