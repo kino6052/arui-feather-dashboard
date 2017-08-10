@@ -27,9 +27,9 @@ let webpackConfig = merge.smart(
             ]
         },
         output: {
-            path: path.resolve(__dirname, BUILD_PATH),
-            publicPath: IS_PRODUCTION ? '../' : `http://${PROXY_ASSETS.host}:${PROXY_ASSETS.port}/`,
-            filename: IS_PRODUCTION ? `${ASSETS_PATH}[name].[hash].js` : `${ASSETS_PATH}[name].js`
+            path: path.resolve(__dirname, BUILD_PATH, ASSETS_PATH),
+            publicPath: IS_PRODUCTION ? './' : `http://${PROXY_ASSETS.host}:${PROXY_ASSETS.port}/assets/`,
+            filename: IS_PRODUCTION ? '[name].[hash].js' : '[name].js'
         },
         module: {
             loaders: [
@@ -56,9 +56,6 @@ let webpackConfig = merge.smart(
 );
 
 if (IS_PRODUCTION) {
-    let extractTextPluginIndex =
-        webpackConfig.plugins.findIndex(plugin => plugin instanceof ExtractTextPlugin);
-    webpackConfig.plugins[extractTextPluginIndex] = new ExtractTextPlugin(`${ASSETS_PATH}[name].[hash].css`);
     webpackConfig.plugins.push(
         function () {
             this.plugin('done', function (stats) {
