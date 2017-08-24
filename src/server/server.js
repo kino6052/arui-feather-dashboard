@@ -5,6 +5,7 @@ import config from 'config';
 import Hapi from 'hapi';
 import h2o2 from 'h2o2';
 import inert from 'inert';
+import crumb from 'crumb';
 
 import pluginPageIndex from './plugins/pages/index';
 import pluginProxyAssets from './plugins/proxy-assets';
@@ -23,6 +24,7 @@ let plugins = [{
 if (PROXY_ASSETS) {
     plugins.push(
         h2o2,
+        { register: crumb, options: { key: 'alfa-csrf', restful: true } },
         { register: pluginProxyAssets, options: PROXY_ASSETS }
     );
 } else {

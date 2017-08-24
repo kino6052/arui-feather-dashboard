@@ -18,6 +18,10 @@ const defaultState = {
     settings: config.get('client')
 };
 
+const CSP = config.get('csp');
+const CSP_HEADER_VALUE =
+    Object.keys(CSP).map(optionName => `${optionName} ${CSP[optionName]}`).join('; ');
+
 export const register = (server, options, next) => {
     let handler = async (request, reply) => {
         const contextRoot = config.get('client.contextRoot');
@@ -35,32 +39,37 @@ export const register = (server, options, next) => {
                 return reply().redirect(contextRoot + redirectLocation.pathname + redirectLocation.search);
             }
 
-            if (renderProps) {
-                let page;
-                const appCode = (
-                    <Provider store={ store }>
-                        <RouterContext { ...renderProps } />
-                    </Provider>
-                );
-                try {
-                    page = template({
-                        staticAssets: options.staticAssets,
-                        assetsHash: options.assetsHash,
-                        content: renderToString(appCode),
-                        state: JSON.stringify(store.getState()),
-                        rootPath: `${contextRoot}/`
-                    });
-                } catch (error) {
-                    console.error('error during render process', error);
-                    reply(Boom.badImplementation());
-                }
-                reply(page);
-            } else {
+            if (!renderProps) {
                 // if you are here,
                 // this means routes do not contain default route
                 console.error(`No page found for path ${path}`);
-                reply(Boom.notFound());
+                return reply(Boom.notFound());
             }
+
+            const appCode = (
+                <Provider store={ store }>
+                    <RouterContext { ...renderProps } />
+                </Provider>
+            );
+
+            let page;
+
+            try {
+                page = template({
+                    staticAssets: options.staticAssets,
+                    assetsHash: options.assetsHash,
+                    content: renderToString(appCode),
+                    state: JSON.stringify(store.getState()),
+                    rootPath: `${contextRoot}/`
+                });
+            } catch (error) {
+                console.error('error during render process', error);
+                return reply(Boom.badImplementation());
+            }
+
+            return reply(page)
+                .header('X-FRAME-OPTIONS', 'DENY')
+                .header('Content-Security-Policy', CSP_HEADER_VALUE);
         });
     };
 
