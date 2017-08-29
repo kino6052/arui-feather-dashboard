@@ -43,7 +43,11 @@ class App extends Component {
     };
 
     render(cn) {
-        return !this.props.error ? this.renderPage(cn) : this.renderErrorPage(cn);
+        return (
+            <ThemeProvider theme='alfa-on-white'>
+                { this.props.error ? this.renderErrorPage(cn) : this.renderPage(cn) }
+            </ThemeProvider>
+        );
     }
 
     renderPage(cn) {
@@ -57,41 +61,39 @@ class App extends Component {
         }));
 
         return (
-            <ThemeProvider theme='alfa-on-white'>
-                <Page
-                    className={ cn }
-                    header={
-                        <Header
-                            menu={
-                                <ApplicationMenu>
+            <Page
+                className={ cn }
+                header={
+                    <Header
+                        menu={
+                            <ApplicationMenu>
+                                <ApplicationMenuItem url='/screen/1'>
+                                    Экран 1
+                                </ApplicationMenuItem>
+                                <ApplicationMenuItem url='/screen/2'>
+                                    Экран 2
+                                </ApplicationMenuItem>
+                                <ApplicationMenuItem url='/screen/3'>
+                                    Экран 3
+                                </ApplicationMenuItem>
+                                <ApplicationMenuGroup title='Группа меню' url='#'>
                                     <ApplicationMenuItem url='/screen/1'>
                                         Экран 1
                                     </ApplicationMenuItem>
                                     <ApplicationMenuItem url='/screen/2'>
                                         Экран 2
                                     </ApplicationMenuItem>
-                                    <ApplicationMenuItem url='/screen/3'>
-                                        Экран 3
-                                    </ApplicationMenuItem>
-                                    <ApplicationMenuGroup title='Группа меню' url='#'>
-                                        <ApplicationMenuItem url='/screen/1'>
-                                            Экран 1
-                                        </ApplicationMenuItem>
-                                        <ApplicationMenuItem url='/screen/2'>
-                                            Экран 2
-                                        </ApplicationMenuItem>
-                                    </ApplicationMenuGroup>
-                                </ApplicationMenu>
-                            }
-                        />
-                    }
-                    footer={ <Footer /> }
-                >
-                        <Content theme='alfa-on-white'>
-                            { this.props.children }
-                        </Content>
-                </Page>
-            </ThemeProvider>
+                                </ApplicationMenuGroup>
+                            </ApplicationMenu>
+                        }
+                    />
+                }
+                footer={ <Footer /> }
+            >
+                <Content theme='alfa-on-white'>
+                    { this.props.children }
+                </Content>
+            </Page>
         );
     }
 

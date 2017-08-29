@@ -10,5 +10,6 @@ module.exports = {
     client: {
         authPage: '/',
         contextRoot: ''
-    }
+    },
+    csp: {}
 };
