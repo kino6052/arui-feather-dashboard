@@ -5,7 +5,6 @@ const path = require('path');
 const config = require('config');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PROXY_ASSETS = config.get('proxyAssets');
@@ -35,7 +34,8 @@ let webpackConfig = merge.smart(
             loaders: [
                 {
                     test: /\.jsx?$/,
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    exclude: /node_modules/
                 }
             ]
         },
