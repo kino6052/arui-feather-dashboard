@@ -8,15 +8,13 @@ then
   appVersion=$MODULE_VERSION
 fi
 
-echo "Start build for $image..."
-
 echo "Docker image version: $appVersion"
 
 image="docker.moscow.alfaintra.net/$appName:$appVersion"
 
 tar -cf build.tar .build
+tar -cf node_modules.tar node_modules
+tar -cf config.tar config
 
-echo "Import build to app container..."
 docker build -f ./Dockerfile -t $image .
-
 docker push $image
