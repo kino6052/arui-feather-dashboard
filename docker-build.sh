@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 appName=$1
 appVersion=$2
 
