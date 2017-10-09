@@ -11,11 +11,9 @@ import Content from 'arui-private/content/fantasy';
 import ErrorPage from 'arui-private/error-page/fantasy';
 import Header from 'arui-private/header/fantasy';
 import Footer from 'arui-private/footer/fantasy';
-import Menu from 'arui-feather/menu/fantasy';
 import ThemeProvider from 'arui-feather/theme-provider';
 import cn from 'arui-feather/cn';
 
-import screens from '../../screen-const';
 import { changeScreen } from '../../actions/screen';
 
 import './app.css';
@@ -51,15 +49,6 @@ class App extends Component {
     }
 
     renderPage(cn) {
-        const menuContent = screens.map((data, index) => ({
-            content: data.title,
-            value: data.name,
-            props: {
-                url: data.path,
-                onClick: (event) => { this.handleMenuClick(event, index + 1); }
-            }
-        }));
-
         return (
             <Page
                 className={ cn }

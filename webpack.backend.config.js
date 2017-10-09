@@ -34,10 +34,10 @@ let webpackConfig = merge.smart(
         },
         externals: nodeModules,
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.ejs$/,
-                    loader: 'ejs-compiled'
+                    loader: 'ejs-compiled-loader'
                 },
                 {
                     test: /\.jsx?$/,
@@ -54,13 +54,11 @@ let webpackConfig = merge.smart(
     },
     IS_PRODUCTION ? {} : {
         plugins: [
-            new webpack.BannerPlugin(
-                'require("source-map-support").install();',
-                {
-                    raw: true,
-                    entryOnly: false
-                }
-            )
+            new webpack.BannerPlugin({
+                banner: 'require("source-map-support").install();',
+                raw: true,
+                entryOnly: false
+            })
         ]
     }
 );
