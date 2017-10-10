@@ -6,8 +6,8 @@ import { Router } from 'react-router';
 import routes from './routes';
 
 const propTypes = {
-    store: Type.object.isRequired,
-    history: Type.object
+    store: Type.shape().isRequired,
+    history: Type.shape()
 };
 
 const defaultProps = {
