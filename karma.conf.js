@@ -8,9 +8,9 @@ module.exports = function (config) {
     let webpackConfig = WEBPACK_CONFIG_TEMPLATE;
     webpackConfig.devtool = 'inline-source-map';
 
-    webpackConfig.module.loaders.push({
-        test: /\.jsx$/,
-        loader: 'isparta',
+    webpackConfig.module.rules.push({
+        test: /\.jsx?$/,
+        loader: 'isparta-loader',
         include: path.resolve('src')
     });
 
