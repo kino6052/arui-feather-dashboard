@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Type from 'prop-types';
-import Heading from 'arui-feather/heading/fantasy';
-import Paragraph from 'arui-feather/paragraph/fantasy';
+import Heading from 'arui-feather/heading';
+import Paragraph from 'arui-feather/paragraph';
 
 import screens from '../../screen-const';
 
