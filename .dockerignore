@@ -7,3 +7,4 @@ TESTS-PhantomJS_*.xml
 
 .awcache
 coverage/
+docker/

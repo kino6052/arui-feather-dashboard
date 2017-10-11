@@ -2,6 +2,8 @@
 
 set -e
 
+echo "Docker build: no build container"
+
 appName=$1
 appVersion=$2
 
