@@ -11,7 +11,7 @@ import Content from 'arui-private/content';
 import ErrorPage from 'arui-private/error-page';
 import Header from 'arui-private/header';
 import Footer from 'arui-private/footer';
-import ThemeProvider from 'arui-feather/theme-provider';
+
 import cn from 'arui-feather/cn';
 
 import { changeScreen } from '../../actions/screen';
@@ -42,16 +42,15 @@ class App extends Component {
 
     render(cn) {
         return (
-            <ThemeProvider theme='alfa-on-white'>
-                { this.props.error ? this.renderErrorPage(cn) : this.renderPage(cn) }
-            </ThemeProvider>
+            <div className={ cn() }>
+                { this.props.error ? this.renderErrorPage() : this.renderPage() }
+            </div>
         );
     }
 
-    renderPage(cn) {
+    renderPage() {
         return (
             <Page
-                className={ cn() }
                 header={
                     <Header
                         menu={
@@ -79,16 +78,16 @@ class App extends Component {
                 }
                 footer={ <Footer /> }
             >
-                <Content theme='alfa-on-white'>
+                <Content>
                     { this.props.children }
                 </Content>
             </Page>
         );
     }
 
-    renderErrorPage(cn) {
+    renderErrorPage() {
         return (
-            <ErrorPage className={ cn() } returnUrl={ this.props.authPage } header={ <Header /> } />
+            <ErrorPage returnUrl={ this.props.authPage } header={ <Header /> } />
         );
     }
 }
