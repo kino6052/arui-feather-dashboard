@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import ThemeProvider from 'arui-feather/theme-provider';
-import ErrorPage from 'arui-private/error-page/fantasy';
+import ErrorPage from 'arui-private/error-page';
 
 export default class Info404 extends Component {
     render() {

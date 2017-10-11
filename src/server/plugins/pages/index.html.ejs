@@ -24,7 +24,9 @@
     </head>
     <body>
         <div id="react-app"><%- content %></div>
+        <% if (staticAssets) { %>
         <script src="<%- rootPath %>assets/vendor<%- assetsHash ? ('.' + assetsHash) : '' %>.js"></script>
+        <% } %>
         <script src="<%- rootPath %>assets/index<%- assetsHash ? ('.' + assetsHash) : '' %>.js"></script>
         <script>window.__main(<%- state %>);</script>
     </body>

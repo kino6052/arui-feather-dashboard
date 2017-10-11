@@ -3,14 +3,14 @@ import { bindActionCreators } from 'redux';
 import { Component } from 'react';
 import Type from 'prop-types';
 
-import Page from 'arui-private/page/fantasy';
-import ApplicationMenu from 'arui-private/application-menu/fantasy';
-import ApplicationMenuItem from 'arui-private/application-menu-item/fantasy';
-import ApplicationMenuGroup from 'arui-private/application-menu-group/fantasy';
-import Content from 'arui-private/content/fantasy';
-import ErrorPage from 'arui-private/error-page/fantasy';
-import Header from 'arui-private/header/fantasy';
-import Footer from 'arui-private/footer/fantasy';
+import Page from 'arui-private/page';
+import ApplicationMenu from 'arui-private/application-menu';
+import ApplicationMenuItem from 'arui-private/application-menu-item';
+import ApplicationMenuGroup from 'arui-private/application-menu-group';
+import Content from 'arui-private/content';
+import ErrorPage from 'arui-private/error-page';
+import Header from 'arui-private/header';
+import Footer from 'arui-private/footer';
 import ThemeProvider from 'arui-feather/theme-provider';
 import cn from 'arui-feather/cn';
 
@@ -51,7 +51,7 @@ class App extends Component {
     renderPage(cn) {
         return (
             <Page
-                className={ cn }
+                className={ cn() }
                 header={
                     <Header
                         menu={
@@ -88,7 +88,7 @@ class App extends Component {
 
     renderErrorPage(cn) {
         return (
-            <ErrorPage className={ cn } returnUrl={ this.props.authPage } header={ <Header /> } />
+            <ErrorPage className={ cn() } returnUrl={ this.props.authPage } header={ <Header /> } />
         );
     }
 }
