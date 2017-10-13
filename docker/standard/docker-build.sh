@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+
+echo "Docker build configuration: build container"
+
 __START_TIME=$(date +%s)
 
 appName=$1

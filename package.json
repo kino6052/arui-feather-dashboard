@@ -6,6 +6,7 @@
     "extrapackage": "node ./prepare-build-package.js",
     "predocker-build": "npm run extrapackage",
     "docker-build": "./docker-build.sh $npm_package_name $npm_package_version",
+    "docker-config": "./docker-config.sh",
     "start": "node ./start",
     "start-frontend": "node ./start-frontend",
     "start-backend": "node ./start-backend",
