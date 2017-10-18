@@ -2,7 +2,7 @@
 /* eslint consistent-return: "off" */
 import { renderToString } from 'react-dom/server';
 import Boom from 'boom';
-import { RouterContext, createMemoryHistory, match } from 'react-router';
+import { RouterContext, createMemoryHistory, match, useRouterHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import config from 'config';
@@ -26,7 +26,10 @@ export const register = (server, options, next) => {
     let handler = async (request, reply) => {
         const contextRoot = config.get('client.contextRoot');
         const path = request.url.path;
-        const memoryHistory = createMemoryHistory(path);
+        const memoryHistory = useRouterHistory(createMemoryHistory)({
+            parseQueryString: decodeURIComponent,
+            stringifyQuery: encodeURIComponent
+        });
         const store = configureStore(false)(defaultState, memoryHistory);
         const history = syncHistoryWithStore(memoryHistory, store);
         match({ history, routes, location: path, basename: contextRoot }, (error, redirectLocation, renderProps) => {
