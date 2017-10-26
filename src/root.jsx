@@ -1,7 +1,7 @@
 import React from 'react';
 import Type from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { ConnectedRouter } from 'react-router-redux';
 
 import routes from './routes';
 
@@ -16,7 +16,9 @@ const defaultProps = {
 
 const Root = ({ store, history }) => (
     <Provider store={ store }>
-        <Router key={ Date.now() } history={ history } routes={ routes } />
+        <ConnectedRouter history={ history }>
+            { routes }
+        </ConnectedRouter>
     </Provider>
 );
 

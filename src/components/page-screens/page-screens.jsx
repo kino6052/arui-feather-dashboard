@@ -8,8 +8,10 @@ import screens from '../../screen-const';
 class ScreenPage extends Component {
     static propTypes = {
         pageKey: Type.string,
-        routeParams: Type.shape({
-            screenId: Type.string.isRequired
+        match: Type.shape({
+            params: Type.shape({
+                screenId: Type.string.isRequired
+            })
         })
     };
 
@@ -19,9 +21,9 @@ class ScreenPage extends Component {
     };
 
     render() {
-        const { pageKey, routeParams } = this.props;
-        const defaultKey = routeParams
-            ? Math.min(screens.length - 1, Math.max(routeParams.screenId - 1, 0))
+        const { pageKey, match: { params } } = this.props;
+        const defaultKey = params
+            ? Math.min(screens.length - 1, Math.max(params.screenId - 1, 0))
             : 0;
         const { about, title } = screens[pageKey || defaultKey];
         return (

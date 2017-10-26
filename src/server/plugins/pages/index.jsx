@@ -2,8 +2,7 @@
 /* eslint consistent-return: "off" */
 import { renderToString } from 'react-dom/server';
 import Boom from 'boom';
-import { RouterContext, createMemoryHistory, match, useRouterHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import config from 'config';
 import configureStore from '../../../configure-store';
@@ -26,54 +25,39 @@ export const register = (server, options, next) => {
     let handler = async (request, reply) => {
         const contextRoot = config.get('client.contextRoot');
         const path = request.url.path;
-        const memoryHistory = useRouterHistory(createMemoryHistory)({
-            parseQueryString: decodeURIComponent,
-            stringifyQuery: encodeURIComponent
-        });
-        const store = configureStore(false)(defaultState, memoryHistory);
-        const history = syncHistoryWithStore(memoryHistory, store);
-        match({ history, routes, location: path, basename: contextRoot }, (error, redirectLocation, renderProps) => {
-            if (error) {
-                console.error(error);
-                return reply(Boom.badImplementation());
-            }
+        const store = configureStore(false)(defaultState);
+        const context = {};
 
-            if (redirectLocation) {
-                return reply().redirect(contextRoot + redirectLocation.pathname + redirectLocation.search);
-            }
+        if (context.url) {
+            return reply().redirect(contextRoot + context.url);
+        }
 
-            if (!renderProps) {
-                // if you are here,
-                // this means routes do not contain default route
-                console.error(`No page found for path ${path}`);
-                return reply(Boom.notFound());
-            }
+        const appCode = (
+            <Provider store={ store }>
+                <StaticRouter url={ path } context={ context }>
+                    { routes }
+                </StaticRouter>
+            </Provider>
+        );
 
-            const appCode = (
-                <Provider store={ store }>
-                    <RouterContext { ...renderProps } />
-                </Provider>
-            );
+        let page;
 
-            let page;
+        try {
+            page = template({
+                staticAssets: options.staticAssets,
+                assetsHash: options.assetsHash,
+                content: renderToString(appCode),
+                state: JSON.stringify(store.getState()),
+                rootPath: `${contextRoot}/`
+            });
+        } catch (error) {
+            console.error('error during render process', error);
+            return reply(Boom.badImplementation());
+        }
 
-            try {
-                page = template({
-                    staticAssets: options.staticAssets,
-                    assetsHash: options.assetsHash,
-                    content: renderToString(appCode),
-                    state: JSON.stringify(store.getState()),
-                    rootPath: `${contextRoot}/`
-                });
-            } catch (error) {
-                console.error('error during render process', error);
-                return reply(Boom.badImplementation());
-            }
-
-            return reply(page)
-                .header('X-FRAME-OPTIONS', 'DENY')
-                .header('Content-Security-Policy', CSP_HEADER_VALUE);
-        });
+        return reply(page)
+            .header('X-FRAME-OPTIONS', 'DENY')
+            .header('Content-Security-Policy', CSP_HEADER_VALUE);
     };
 
     server.route({ method: 'GET', path: '/{whateverPath?}', handler }); // root route
