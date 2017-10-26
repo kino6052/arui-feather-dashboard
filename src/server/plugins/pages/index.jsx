@@ -29,7 +29,7 @@ export const register = (server, options, next) => {
         const context = {};
 
         if (context.url) {
-            return reply().redirect(contextRoot + context.url);
+            return reply().redirect(context.url);
         }
 
         const appCode = (
