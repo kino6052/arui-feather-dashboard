@@ -4,12 +4,24 @@ import App from './components/app/app';
 import ScreenPage from './components/page-screens/page-screens';
 import Info404 from './components/info404/info404';
 
-export default (
+const WrappedComponent = (Component, props) => (
     <App>
-        <Switch>
-            <Redirect from='/' to='/screen/2' exact={ true } />
-            <Route exact={ true } path={ '/screen/:screenId' } component={ ScreenPage } />
-            <Route component={ Info404 } />
-        </Switch>
+        <Component { ...props } />
     </App>
+);
+
+export default (
+    <Switch>
+        <Route
+            exact={ true }
+            path={ '/screen/:screenId' }
+            render={ props => WrappedComponent(ScreenPage, props) }
+        />
+        <Route
+            exact={ true }
+            path={ '/' }
+            render={ () => <Redirect to='/screen/2' /> }
+        />
+        <Route component={ Info404 } />
+    </Switch>
 );
