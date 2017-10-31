@@ -3,9 +3,13 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
+const config = require('config');
 const merge = require('webpack-merge');
 
-const BUILD_PATH = './.build/';
+const PROXY_ASSETS = config.get('proxyAssets');
+const ASSETS_PATH = config.get('buildConfig.assetsDir');
+const BUILD_PATH = config.get('buildConfig.targetDir');
+
 const IS_PRODUCTION = (process.env.NODE_ENV === 'production');
 const ARUI_TEMPLATE = require('arui-presets/webpack.base');
 
@@ -29,7 +33,9 @@ let webpackConfig = merge.smart(
         entry: ['./src/server/server.js'],
         output: {
             path: path.resolve(__dirname, BUILD_PATH),
-            publicPath: '/',
+            publicPath: IS_PRODUCTION
+                ? `${ASSETS_PATH}/`
+                : `http://${PROXY_ASSETS.host}:${PROXY_ASSETS.port}/`,
             filename: 'server.js'
         },
         externals: nodeModules,
