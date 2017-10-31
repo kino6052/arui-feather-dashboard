@@ -85,13 +85,10 @@
   },
   "lint-staged": {
     "concurrent": false,
-    "*.{js,jsx}": [
-      "eslint"
-    ],
-    "src/**/*.{js,jsx}": [
-      "eslint",
-      "test"
-    ],
-    "*.css": "stylelint"
+    "linters": {
+      "*.{js,jsx}": ["eslint"],
+      "src/**/*.{js,jsx}": ["eslint","test"],
+      "*.css": "stylelint"
+    }
   }
 }
