@@ -2,10 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useRouterHistory } from 'react-router';
-import { createHistory } from 'history';
-import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
+import createHistory from 'history/createBrowserHistory';
 
 import Root from './root';
 import configureStore from './configure-store';
@@ -19,14 +17,13 @@ let configureStoreLocal = configureStore(HOT_LOADER);
 if (typeof window !== 'undefined') {
     // eslint-disable-next-line no-underscore-dangle
     window.__main = (state) => {
-        let history = CAN_USE_DOM
-            ? useRouterHistory(createHistory)({
+        const history = CAN_USE_DOM
+            ? createHistory({
                 basename: (state.settings && state.settings.contextRoot) || ''
             })
             : null;
 
         let store = configureStoreLocal(state, history);
-        history = syncHistoryWithStore(history, store);
 
         if (HOT_LOADER) {
             ReactDOM.render(
