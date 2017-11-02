@@ -11,8 +11,6 @@ import config from 'config';
 import configureStore from '../../../configure-store';
 import routes from '../../../routes';
 
-const IS_PRODUCTION = (process.env.NODE_ENV === 'production');
-
 const defaultState = {
     app: {
         error: false
@@ -33,7 +31,7 @@ export const register = (server, options, next) => {
             );
         }
         const contextRoot = config.get('client.contextRoot');
-        const path = request.url.path;
+        const url = request.url.path;
         const store = configureStore(false)(defaultState);
         const context = {};
 
@@ -43,7 +41,7 @@ export const register = (server, options, next) => {
 
         const appCode = (
             <Provider store={ store }>
-                <StaticRouter url={ path } context={ context }>
+                <StaticRouter url={ url } context={ context }>
                     { routes }
                 </StaticRouter>
             </Provider>
