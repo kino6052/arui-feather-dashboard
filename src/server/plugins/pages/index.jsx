@@ -1,14 +1,15 @@
 /* eslint no-console: ["error", { allow: ["log", "error"] }] */
 /* eslint consistent-return: "off" */
 import { renderToString } from 'react-dom/server';
+import path from 'path';
+import handlebars from 'handlebars';
+import fs from 'fs';
 import Boom from 'boom';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import config from 'config';
 import configureStore from '../../../configure-store';
 import routes from '../../../routes';
-
-const template = require('./index.html.ejs');
 
 const defaultState = {
     app: {
@@ -21,10 +22,16 @@ const CSP = config.get('csp');
 const CSP_HEADER_VALUE =
     Object.keys(CSP).map(optionName => `${optionName} ${CSP[optionName]}`).join('; ');
 
+let template;
 export const register = (server, options, next) => {
     let handler = async (request, reply) => {
+        if (!template) { // лениво инициализируем темплейт чтобы не использовать темплейт с предыдущей сборки
+            template = handlebars.compile(
+                fs.readFileSync(path.join(process.cwd(), config.get('buildConfig.targetDir'), 'index.hbs'), 'utf8')
+            );
+        }
         const contextRoot = config.get('client.contextRoot');
-        const path = request.url.path;
+        const url = request.url.path;
         const store = configureStore(false)(defaultState);
         const context = {};
 
@@ -34,7 +41,7 @@ export const register = (server, options, next) => {
 
         const appCode = (
             <Provider store={ store }>
-                <StaticRouter url={ path } context={ context }>
+                <StaticRouter url={ url } context={ context }>
                     { routes }
                 </StaticRouter>
             </Provider>
@@ -44,11 +51,9 @@ export const register = (server, options, next) => {
 
         try {
             page = template({
-                staticAssets: options.staticAssets,
-                assetsHash: options.assetsHash,
                 content: renderToString(appCode),
                 state: JSON.stringify(store.getState()),
-                rootPath: `${contextRoot}/`
+                contextRoot: contextRoot ? path.normalize(`${contextRoot}/`) : ''
             });
         } catch (error) {
             console.error('error during render process', error);
