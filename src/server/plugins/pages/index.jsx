@@ -41,7 +41,7 @@ export const register = (server, options, next) => {
 
         const appCode = (
             <Provider store={ store }>
-                <StaticRouter url={ url } context={ context }>
+                <StaticRouter location={ url } context={ context }>
                     { routes }
                 </StaticRouter>
             </Provider>

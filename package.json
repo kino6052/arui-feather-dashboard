@@ -12,16 +12,12 @@
     "start-backend": "node ./start-backend",
     "watch": "HOT_LOADER=1 npm start",
     "build": "NODE_ENV=production node build",
-    "build-static-default": "NODE_ENV=production webpack --config webpack.static.config.js",
-    "build-static-ssr": "SERVER_SIDE_RENDER=1 npm run build-static-default",
-    "build-static-csr": "CLIENT_SIDE_RENDER=1 npm run build-static-default",
-    "build-static": "SERVER_SIDE_RENDER=1 CLIENT_SIDE_RENDER=1 npm run build-static-default",
     "lint-css": "stylelint ./src/**/*.css",
     "lint-js": "eslint ./*.js ./src/ --ext .js,.jsx",
     "lint": "npm run lint-css && npm run lint-js",
     "karma": "karma start",
     "test": "npm run lint && npm run karma",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged && npm test"
   },
   "devDependencies": {
     "arui-presets": "^4.3.0",
@@ -87,7 +83,7 @@
     "concurrent": false,
     "linters": {
       "*.{js,jsx}": ["eslint"],
-      "src/**/*.{js,jsx}": ["eslint","test"],
+      "src/**/*.{js,jsx}": ["eslint"],
       "*.css": "stylelint"
     }
   }
