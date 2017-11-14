@@ -35,10 +35,6 @@ export const register = (server, options, next) => {
         const store = configureStore(false)(defaultState);
         const context = {};
 
-        if (context.url) {
-            return reply().redirect(context.url);
-        }
-
         const appCode = (
             <Provider store={ store }>
                 <StaticRouter location={ url } context={ context }>
@@ -58,6 +54,10 @@ export const register = (server, options, next) => {
         } catch (error) {
             console.error('error during render process', error);
             return reply(Boom.badImplementation());
+        }
+
+        if (context.url) {
+            return reply().redirect(context.url);
         }
 
         return reply(page)
