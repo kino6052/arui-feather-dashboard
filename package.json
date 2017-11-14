@@ -51,7 +51,6 @@
     "redux-devtools": "^3.4.0",
     "respawn": "^2.3.0",
     "rimraf": "^2.5.2",
-    "static-site-generator-webpack-plugin": "^3.0.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"

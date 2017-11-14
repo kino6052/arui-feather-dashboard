@@ -24,16 +24,6 @@ ARUI Feather Stub
 2. `npm run build`
 3. После чего можно проверить сборку командой `NODE_ENV=production node ./.build/server.js`
 
-Сборка проекта в режиме статики (HTML + CSS + JS)
--------------------------------------------------
-
-1. `npm i`
-2. Управлять режимами рендера можно командами:
-    a. SSR + CSR: `npm run build-static`
-    b. SSR: `npm run build-static-ssr`
-    c. CSR: `npm run build-static-csr`
-3. Собранную версию можно найти в директории `.build/`
-
 Автоматические проверки кода
 ----------------------------
 
