@@ -12,19 +12,33 @@ import pluginProxyAssets from './plugins/proxy-assets';
 import pluginStaticAssets from './plugins/static-assets';
 
 const PROXY_ASSETS = config.get('proxyAssets');
+const CONTEXT_ROOT = config.get('client.contextRoot');
 
-let plugins = [{
-    register: pluginPageIndex,
-    options: {
-        staticAssets: !PROXY_ASSETS,
-        assetsHash: !PROXY_ASSETS && eval('require')('./hash.json') // eslint-disable-line
+let plugins = [
+    {
+        register: crumb,
+        options: {
+            key: 'alfa-csrf',
+            restful: true,
+            cookieOptions: {
+                isSecure: false,
+                isHttpOnly: false,
+                path: CONTEXT_ROOT
+            }
+        }
+    },
+    {
+        register: pluginPageIndex,
+        options: {
+            staticAssets: !PROXY_ASSETS,
+            assetsHash: !PROXY_ASSETS && eval('require')('./hash.json') // eslint-disable-line
+        }
     }
-}];
+];
 
 if (PROXY_ASSETS) {
     plugins.push(
         h2o2,
-        { register: crumb, options: { key: 'alfa-csrf', restful: true } },
         { register: pluginProxyAssets, options: PROXY_ASSETS }
     );
 } else {
