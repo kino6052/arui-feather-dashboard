@@ -81,8 +81,12 @@
   "lint-staged": {
     "concurrent": false,
     "linters": {
-      "*.{js,jsx}": ["eslint"],
-      "src/**/*.{js,jsx}": ["eslint"],
+      "*.{js,jsx}": [
+        "eslint"
+      ],
+      "src/**/*.{js,jsx}": [
+        "eslint"
+      ],
       "*.css": "stylelint"
     }
   }
