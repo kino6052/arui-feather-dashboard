@@ -32,7 +32,7 @@ let webpackConfig = merge.smart(
             path: path.resolve(__dirname, BUILD_PATH, ASSETS_PATH),
             publicPath: IS_PRODUCTION ?
                 `${ASSETS_PATH}/` :
-                `http://${PROXY_ASSETS.host}:${PROXY_ASSETS.port}/${ASSETS_PATH}`,
+                `http://${PROXY_ASSETS.host}:${PROXY_ASSETS.port}/${ASSETS_PATH}/`,
             filename: IS_PRODUCTION ? '[name].[chunkhash].js' : '[name].js'
         },
         module: {
