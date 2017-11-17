@@ -13,7 +13,7 @@ module.exports = {
     devtools: true,
     client: {
         authPage: '/',
-        contextRoot: ''
+        contextRoot: '/'
     },
     csp: {}
 };
