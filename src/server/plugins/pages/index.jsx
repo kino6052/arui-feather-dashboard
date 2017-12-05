@@ -1,6 +1,6 @@
 /* eslint no-console: ["error", { allow: ["log", "error"] }] */
 /* eslint consistent-return: "off" */
-import { renderToString } from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import path from 'path';
 import handlebars from 'handlebars';
 import fs from 'fs';
@@ -26,9 +26,8 @@ let template;
 export const register = (server, options, next) => {
     let handler = async (request, reply) => {
         if (!template) { // лениво инициализируем темплейт чтобы не использовать темплейт с предыдущей сборки
-            template = handlebars.compile(
-                fs.readFileSync(path.join(process.cwd(), config.get('buildConfig.targetDir'), 'index.hbs'), 'utf8')
-            );
+            const targetDir = config.get('buildConfig.targetDir');
+            template = handlebars.compile(fs.readFileSync(path.join(process.cwd(), targetDir, 'index.hbs'), 'utf8'));
         }
         const contextRoot = config.get('client.contextRoot');
         const url = request.url.path;
@@ -47,7 +46,7 @@ export const register = (server, options, next) => {
 
         try {
             page = template({
-                content: renderToString(appCode),
+                content: renderToStaticMarkup(appCode),
                 state: JSON.stringify(store.getState()),
                 contextRoot: contextRoot ? path.normalize(`${contextRoot}/`) : ''
             });

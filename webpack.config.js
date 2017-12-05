@@ -82,16 +82,14 @@ let webpackConfig = merge.smart(
 );
 
 if (IS_PRODUCTION) {
-    webpackConfig.plugins.push(
-        function () {
-            this.plugin('done', function (stats) {
-                fs.writeFileSync(
-                    path.join(__dirname, BUILD_PATH, 'hash.json'),
-                    JSON.stringify(stats.toJson().hash, null, 2)
-                );
-            });
-        }
-    );
+    webpackConfig.plugins.push(function () {
+        this.plugin('done', function (stats) {
+            fs.writeFileSync(
+                path.join(__dirname, BUILD_PATH, 'hash.json'),
+                JSON.stringify(stats.toJson().hash, null, 2)
+            );
+        });
+    });
 }
 
 module.exports = webpackConfig;

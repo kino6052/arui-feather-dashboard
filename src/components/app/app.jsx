@@ -78,7 +78,7 @@ class App extends Component {
                 }
                 footer={ <Footer /> }
             >
-                <Content>
+                <Content theme='alfa-on-white'>
                     { this.props.children }
                 </Content>
             </Page>

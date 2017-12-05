@@ -8,6 +8,7 @@ import screens from '../../screen-const';
 class ScreenPage extends Component {
     static propTypes = {
         pageKey: Type.string,
+        routeParams: Type.shape({}),
         match: Type.shape({
             params: Type.shape({
                 screenId: Type.string.isRequired
