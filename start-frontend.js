@@ -28,7 +28,7 @@ webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((result, item) => 
 }, {});
 
 if (HOT_LOADER) {
-    webpackConfig.module.loaders
+    webpackConfig.module.rules
         .filter(loader => loader.loader === 'babel')
         .forEach((loader) => {
             if (loader.query && loader.query.plugins) {
