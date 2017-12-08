@@ -31,13 +31,14 @@ export const register = (server, options, next) => {
             );
         }
         const contextRoot = config.get('client.contextRoot');
+        const basename = contextRoot === '/' ? '' : contextRoot;
         const url = request.url.path;
         const store = configureStore(false)(defaultState);
         const context = {};
 
         const appCode = (
             <Provider store={ store }>
-                <StaticRouter location={ url } context={ context }>
+                <StaticRouter location={ url } basename={ basename } context={ context }>
                     { routes }
                 </StaticRouter>
             </Provider>
