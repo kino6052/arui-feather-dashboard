@@ -14,12 +14,12 @@ export default (
     <Switch>
         <Route
             exact={ true }
-            path={ '/screen/:screenId' }
+            path='/screen/:screenId'
             render={ props => WrappedComponent(ScreenPage, props) }
         />
         <Route
             exact={ true }
-            path={ '/' }
+            path='/'
             render={ () => <Redirect to='/screen/2' /> }
         />
         <Route component={ Info404 } />

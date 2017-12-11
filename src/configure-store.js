@@ -14,7 +14,8 @@ function configureStore(isHotLoaderRequired = false) {
             applyMiddleware(
                 routerMiddleware(history),
                 thunk
-            ));
+            )
+        );
 
         if (isHotLoaderRequired && module.hot) {
             module.hot.accept('./reducers/app-reducer', () => {

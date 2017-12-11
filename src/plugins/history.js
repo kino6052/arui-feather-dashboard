@@ -1,3 +1,7 @@
+/* global history */
+/* eslint no-restricted-globals: ["off", "history"] */
+
+
 import { changeScreen } from '../actions/screen';
 import { screens } from '../screen-const';
 
