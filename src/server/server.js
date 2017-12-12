@@ -50,7 +50,10 @@ if (PROXY_ASSETS) {
 
 let server = new Hapi.Server();
 server.connection({
-    port: config.get('server.port')
+    port: config.get('server.port'),
+    state: {
+        strictHeader: false
+    }
 });
 
 server.register(plugins, (error) => {
