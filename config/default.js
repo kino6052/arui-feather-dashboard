@@ -1,17 +1,14 @@
+const packageJson = require('../package.json');
+
 module.exports = {
     server: {
-        port: 8080
-    },
-    buildConfig: {
-        targetDir: '.build',
-        assetsDir: 'assets'
-    },
-    proxyAssets: {
-        host: 'localhost',
-        port: 9090
+        port: 3000
     },
     devtools: true,
     client: {
+        pageTitle: 'ARUI Stub',
+        projectName: packageJson.name,
+        version: packageJson.version,
         authPage: '/',
         contextRoot: '/'
     },

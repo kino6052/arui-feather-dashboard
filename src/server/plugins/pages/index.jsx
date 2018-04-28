@@ -1,34 +1,34 @@
 /* eslint no-console: ["error", { allow: ["log", "error"] }] */
-/* eslint consistent-return: "off" */
-import { renderToStaticMarkup } from 'react-dom/server';
-import path from 'path';
-import handlebars from 'handlebars';
-import fs from 'fs';
+
+import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import React from 'react';
 import Boom from 'boom';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import config from 'config';
+import AppHtml from 'arui-private/app-html';
+
 import configureStore from '../../../configure-store';
 import routes from '../../../routes';
+import readAssetsManifest from '../read-assets-manifest';
+
+const appSettings = config.get('client');
 
 const defaultState = {
     app: {
         error: false
     },
-    settings: config.get('client')
+    settings: appSettings
 };
 
 const CSP = config.get('csp');
 const CSP_HEADER_VALUE =
     Object.keys(CSP).map(optionName => `${optionName} ${CSP[optionName]}`).join('; ');
 
-let template;
 export const register = (server, options, next) => {
+    let assets = readAssetsManifest();
+
     let handler = async (request, reply) => {
-        if (!template) { // лениво инициализируем темплейт чтобы не использовать темплейт с предыдущей сборки
-            const targetDir = config.get('buildConfig.targetDir');
-            template = handlebars.compile(fs.readFileSync(path.join(process.cwd(), targetDir, 'index.hbs'), 'utf8'));
-        }
         const contextRoot = config.get('client.contextRoot');
         const basename = contextRoot === '/' ? '' : contextRoot;
         const url = request.url.path;
@@ -46,11 +46,26 @@ export const register = (server, options, next) => {
         let page;
 
         try {
-            page = template({
-                content: renderToStaticMarkup(appCode),
-                state: JSON.stringify(store.getState()),
-                contextRoot: contextRoot ? path.normalize(`${contextRoot}/`) : ''
-            });
+            const appHtml = renderToString(appCode);
+            /* eslint-disable react/no-danger */
+            const layoutCode = (
+                <AppHtml
+                    contextRoot={ contextRoot }
+                    pageTitle={ appSettings.pageTitle }
+                    appName={ appSettings.projectName }
+                    appVersion={ appSettings.version }
+                    addAlfaMetrics={ false }
+                    hasError={ false }
+                    cssFiles={ assets.css }
+                    jsFiles={ assets.js }
+                    appState={ store.getState() }
+                >
+                    <div id='react-app' dangerouslySetInnerHTML={ { __html: appHtml } } />
+                </AppHtml>
+            );
+            /* eslint-enable react/no-danger */
+
+            page = renderToStaticMarkup(layoutCode);
         } catch (error) {
             console.error('error during render process', error);
             return reply(Boom.badImplementation());
