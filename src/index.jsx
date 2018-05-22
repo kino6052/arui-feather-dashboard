@@ -9,10 +9,9 @@ import Root from './root';
 import configureStore from './configure-store';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const HOT_LOADER = !!process.HOT_LOADER && !IS_PRODUCTION;
 const CAN_USE_DOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
-let configureStoreLocal = configureStore(HOT_LOADER);
+let configureStoreLocal = configureStore();
 
 if (typeof window !== 'undefined') {
     // eslint-disable-next-line no-underscore-dangle
@@ -25,8 +24,8 @@ if (typeof window !== 'undefined') {
 
         let store = configureStoreLocal(state, history);
 
-        if (HOT_LOADER) {
-            ReactDOM.render(
+        if (!IS_PRODUCTION && module.hot) {
+            ReactDOM.hydrate(
                 <AppContainer>
                     <Root store={ store } history={ history } />
                 </AppContainer>,
@@ -46,7 +45,7 @@ if (typeof window !== 'undefined') {
                 });
             }
         } else {
-            ReactDOM.render(<Root store={ store } history={ history } />, document.getElementById('react-app'));
+            ReactDOM.hydrate(<Root store={ store } history={ history } />, document.getElementById('react-app'));
         }
     };
 }

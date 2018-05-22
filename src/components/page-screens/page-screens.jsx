@@ -18,7 +18,8 @@ class ScreenPage extends Component {
 
     static defaultProps = {
         pageKey: null,
-        routeParams: null
+        routeParams: null,
+        match: {}
     };
 
     render() {

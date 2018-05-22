@@ -1,3 +1,3 @@
 module.exports = {
-    extends: 'arui-presets/stylelint'
+    extends: require.resolve('arui-presets/stylelint')
 };
