@@ -26,9 +26,13 @@ const CSP_HEADER_VALUE =
     Object.keys(CSP).map(optionName => `${optionName} ${CSP[optionName]}`).join('; ');
 
 export const register = (server, options, next) => {
-    let assets = readAssetsManifest();
+    let assets;
 
     let handler = async (request, reply) => {
+        if (!assets) {
+            assets = readAssetsManifest();
+        }
+
         const contextRoot = config.get('client.contextRoot');
         const basename = contextRoot === '/' ? '' : contextRoot;
         const url = request.url.path;
