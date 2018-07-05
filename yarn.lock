@@ -304,22 +304,6 @@
   dependencies:
     find-up "^2.1.0"
 
-"@fimbul/bifrost@^0.6.0":
-  version "0.6.0"
-  resolved "http://mvn//artifactory/api/npm/npm/@fimbul/bifrost/-/bifrost-0.6.0.tgz#5150302b63e1bd37ff95f561c3605949cb7e3770"
-  dependencies:
-    "@fimbul/ymir" "^0.6.0"
-    get-caller-file "^1.0.2"
-    tslib "^1.8.1"
-
-"@fimbul/ymir@^0.6.0":
-  version "0.6.0"
-  resolved "http://mvn//artifactory/api/npm/npm/@fimbul/ymir/-/ymir-0.6.0.tgz#537cb15d361b7c993fe953b48c898ecdf4f671b8"
-  dependencies:
-    inversify "^4.10.0"
-    reflect-metadata "^0.1.12"
-    tslib "^1.8.1"
-
 "@marionebl/sander@^0.6.0":
   version "0.6.1"
   resolved "http://mvn//artifactory/api/npm/npm/@marionebl/sander/-/sander-0.6.1.tgz#1958965874f24bc51be48875feb50d642fc41f7b"
@@ -667,9 +651,9 @@ arui-feather@12.7.1:
     react-style-proptype "3.2.1"
     react-textarea-autosize "5.2.1"
 
-arui-presets@4.13.3:
-  version "4.13.3"
-  resolved "http://mvn//artifactory/api/npm/npm/arui-presets/-/arui-presets-4.13.3.tgz#4521c81c4c1293ef28d8e7bea20f9ebcf8a07f6b"
+arui-presets@5.0.0:
+  version "5.0.0"
+  resolved "http://mvn//artifactory/api/npm/npm/arui-presets/-/arui-presets-5.0.0.tgz#3897a23bdaf17a6935e15020933c4816fabecfa7"
   dependencies:
     "@commitlint/cli" "6.1.3"
     "@commitlint/config-conventional" "6.1.3"
@@ -694,15 +678,6 @@ arui-presets@4.13.3:
     command-line-args "5.0.2"
     compression-webpack-plugin "1.1.7"
     css-loader "0.28.9"
-    eslint "4.19.1"
-    eslint-config-airbnb "16.1.0"
-    eslint-plugin-chai-friendly "0.4.1"
-    eslint-plugin-class-methods-use-this-regexp "0.1.0"
-    eslint-plugin-import "2.11.0"
-    eslint-plugin-jsdoc "3.6.2"
-    eslint-plugin-jsx-a11y "6.0.3"
-    eslint-plugin-react "7.7.0"
-    eslint-plugin-sort-class-members "1.3.0"
     extract-text-webpack-plugin "3.0.2"
     file-loader "1.1.9"
     find-parent-dir "0.3.0"
@@ -726,7 +701,6 @@ arui-presets@4.13.3:
     react-dev-utils "5.0.1"
     style-loader "0.20.2"
     stylelint "9.2.0"
-    tslint-config-airbnb "5.8.0"
     url-loader "0.6.2"
     webpack "3.11.0"
     webpack-config "7.5.0"
@@ -749,9 +723,9 @@ arui-private@8.0.0:
     react-transition-group "2.2.1"
     transliteration.cyr "^1.0.5"
 
-arui-scripts@1.2.1:
-  version "1.2.1"
-  resolved "http://mvn//artifactory/api/npm/npm/arui-scripts/-/arui-scripts-1.2.1.tgz#ad6a9e4cc97b815435f4afa409feaa332b78c91b"
+arui-scripts@1.2.7:
+  version "1.2.7"
+  resolved "http://mvn//artifactory/api/npm/npm/arui-scripts/-/arui-scripts-1.2.7.tgz#35a352702c3224333a4d3795e712a818002515db"
   dependencies:
     assets-webpack-plugin "3.5.1"
     autoprefixer "^8.0.0"
@@ -771,6 +745,7 @@ arui-scripts@1.2.1:
     babel-preset-env "^1.6.1"
     babel-preset-react "^6.24.1"
     babel-runtime "^6.26.0"
+    cache-loader "^1.2.2"
     case-sensitive-paths-webpack-plugin "^2.1.1"
     chalk "^2.3.1"
     compression-webpack-plugin "1.1.8"
@@ -782,6 +757,8 @@ arui-scripts@1.2.1:
     expose-loader "0.7.4"
     extract-text-webpack-plugin "^3.0.2"
     file-loader "^1.1.9"
+    fork-ts-checker-webpack-plugin "^0.4.1"
+    fs-extra "6.0.1"
     jest "22.4.2"
     jest-snapshot-serializer-class-name-to-string "1.0.0"
     lodash.merge "4.6.1"
@@ -809,9 +786,10 @@ arui-scripts@1.2.1:
     shelljs "0.8.1"
     start-server-webpack-plugin "^2.2.1"
     style-loader "^0.20.2"
+    tar "4.4.4"
     ts-jest "22.4.0"
     ts-loader "^3.5.0"
-    typescript "^2.7.2"
+    typescript "^2.9.0"
     url-loader "^0.6.2"
     webpack "^3.11.0"
     webpack-dev-server "^2.11.1"
@@ -2028,6 +2006,15 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
+cache-loader@^1.2.2:
+  version "1.2.2"
+  resolved "http://mvn//artifactory/api/npm/npm/cache-loader/-/cache-loader-1.2.2.tgz#6d5c38ded959a09cc5d58190ab5af6f73bd353f5"
+  dependencies:
+    loader-utils "^1.1.0"
+    mkdirp "^0.5.1"
+    neo-async "^2.5.0"
+    schema-utils "^0.4.2"
+
 call-me-maybe@^1.0.1:
   version "1.0.1"
   resolved "http://mvn//artifactory/api/npm/npm/call-me-maybe/-/call-me-maybe-1.0.1.tgz#26d208ea89e37b5cbde60250a15f031c16a4d66b"
@@ -2203,7 +2190,7 @@ cheerio@^1.0.0-rc.2:
     lodash "^4.15.0"
     parse5 "^3.0.1"
 
-chokidar@^1.6.0, chokidar@^1.6.1:
+chokidar@^1.6.0, chokidar@^1.6.1, chokidar@^1.7.0:
   version "1.7.0"
   resolved "http://mvn//artifactory/api/npm/npm/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   dependencies:
@@ -3131,13 +3118,6 @@ doctrine@1.5.0:
     esutils "^2.0.2"
     isarray "^1.0.0"
 
-doctrine@^0.7.2:
-  version "0.7.2"
-  resolved "http://mvn//artifactory/api/npm/npm/doctrine/-/doctrine-0.7.2.tgz#7cb860359ba3be90e040b26b729ce4bfa654c523"
-  dependencies:
-    esutils "^1.1.6"
-    isarray "0.0.1"
-
 doctrine@^2.0.2, doctrine@^2.1.0:
   version "2.1.0"
   resolved "http://mvn//artifactory/api/npm/npm/doctrine/-/doctrine-2.1.0.tgz#5cd01fc101621b42c4cd7f5d1a66243716d3f39d"
@@ -3558,7 +3538,50 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "http://mvn//artifactory/api/npm/npm/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@4.19.1, eslint@^4.9.0:
+eslint@4.19.0:
+  version "4.19.0"
+  resolved "http://mvn//artifactory/api/npm/npm/eslint/-/eslint-4.19.0.tgz#9e900efb5506812ac374557034ef6f5c3642fc4c"
+  dependencies:
+    ajv "^5.3.0"
+    babel-code-frame "^6.22.0"
+    chalk "^2.1.0"
+    concat-stream "^1.6.0"
+    cross-spawn "^5.1.0"
+    debug "^3.1.0"
+    doctrine "^2.1.0"
+    eslint-scope "^3.7.1"
+    eslint-visitor-keys "^1.0.0"
+    espree "^3.5.4"
+    esquery "^1.0.0"
+    esutils "^2.0.2"
+    file-entry-cache "^2.0.0"
+    functional-red-black-tree "^1.0.1"
+    glob "^7.1.2"
+    globals "^11.0.1"
+    ignore "^3.3.3"
+    imurmurhash "^0.1.4"
+    inquirer "^3.0.6"
+    is-resolvable "^1.0.0"
+    js-yaml "^3.9.1"
+    json-stable-stringify-without-jsonify "^1.0.1"
+    levn "^0.3.0"
+    lodash "^4.17.4"
+    minimatch "^3.0.2"
+    mkdirp "^0.5.1"
+    natural-compare "^1.4.0"
+    optionator "^0.8.2"
+    path-is-inside "^1.0.2"
+    pluralize "^7.0.0"
+    progress "^2.0.0"
+    regexpp "^1.0.1"
+    require-uncached "^1.0.3"
+    semver "^5.3.0"
+    strip-ansi "^4.0.0"
+    strip-json-comments "~2.0.1"
+    table "4.0.2"
+    text-table "~0.2.0"
+
+eslint@^4.9.0:
   version "4.19.1"
   resolved "http://mvn//artifactory/api/npm/npm/eslint/-/eslint-4.19.1.tgz#32d1d653e1d90408854bfb296f076ec7e186a300"
   dependencies:
@@ -3635,10 +3658,6 @@ esrecurse@^4.1.0:
 estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "http://mvn//artifactory/api/npm/npm/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
-
-esutils@^1.1.6:
-  version "1.1.6"
-  resolved "http://mvn//artifactory/api/npm/npm/esutils/-/esutils-1.1.6.tgz#c01ccaa9ae4b897c6d0c3e210ae52f3c7a844375"
 
 esutils@^2.0.2:
   version "2.0.2"
@@ -4085,6 +4104,22 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "http://mvn//artifactory/api/npm/npm/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
+fork-ts-checker-webpack-plugin@^0.4.1:
+  version "0.4.2"
+  resolved "http://mvn//artifactory/api/npm/npm/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-0.4.2.tgz#8b57b736a6623110ee8899f575aef044d64a38ba"
+  dependencies:
+    babel-code-frame "^6.22.0"
+    chalk "^1.1.3"
+    chokidar "^1.7.0"
+    lodash.endswith "^4.2.1"
+    lodash.isfunction "^3.0.8"
+    lodash.isstring "^4.0.1"
+    lodash.startswith "^4.2.1"
+    minimatch "^3.0.4"
+    resolve "^1.5.0"
+    tapable "^1.0.0"
+    vue-parser "^1.1.5"
+
 form-data@~2.3.1:
   version "2.3.2"
   resolved "http://mvn//artifactory/api/npm/npm/form-data/-/form-data-2.3.2.tgz#4970498be604c20c005d4f5c23aecd21d6b49099"
@@ -4117,6 +4152,14 @@ from2@^2.1.0:
 fs-extra@4.0.3:
   version "4.0.3"
   resolved "http://mvn//artifactory/api/npm/npm/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
+fs-extra@6.0.1:
+  version "6.0.1"
+  resolved "http://mvn//artifactory/api/npm/npm/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
@@ -4191,7 +4234,7 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-get-caller-file@^1.0.1, get-caller-file@^1.0.2:
+get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "http://mvn//artifactory/api/npm/npm/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
 
@@ -4819,10 +4862,6 @@ invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
   resolved "http://mvn//artifactory/api/npm/npm/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
     loose-envify "^1.0.0"
-
-inversify@^4.10.0:
-  version "4.13.0"
-  resolved "http://mvn//artifactory/api/npm/npm/inversify/-/inversify-4.13.0.tgz#0ab40570bfa4474b04d5b919bbab3a4f682a72f5"
 
 invert-kv@^1.0.0:
   version "1.0.0"
@@ -6016,6 +6055,10 @@ lodash.debounce@4.0.8:
   version "4.0.8"
   resolved "http://mvn//artifactory/api/npm/npm/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
+lodash.endswith@^4.2.1:
+  version "4.2.1"
+  resolved "http://mvn//artifactory/api/npm/npm/lodash.endswith/-/lodash.endswith-4.2.1.tgz#fed59ac1738ed3e236edd7064ec456448b37bc09"
+
 lodash.flattendeep@^4.4.0:
   version "4.4.0"
   resolved "http://mvn//artifactory/api/npm/npm/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
@@ -6027,6 +6070,10 @@ lodash.isarguments@^3.0.0:
 lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "http://mvn//artifactory/api/npm/npm/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
+
+lodash.isfunction@^3.0.8:
+  version "3.0.9"
+  resolved "http://mvn//artifactory/api/npm/npm/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
 
 lodash.isnil@^4.0.0:
   version "4.0.0"
@@ -6043,6 +6090,10 @@ lodash.isplainobject@^3.0.0:
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "http://mvn//artifactory/api/npm/npm/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
+
+lodash.isstring@^4.0.1:
+  version "4.0.1"
+  resolved "http://mvn//artifactory/api/npm/npm/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
 
 lodash.istypedarray@^3.0.0:
   version "3.0.6"
@@ -6122,6 +6173,10 @@ lodash.sortedindexof@4.1.0:
 lodash.startcase@4.4.0:
   version "4.4.0"
   resolved "http://mvn//artifactory/api/npm/npm/lodash.startcase/-/lodash.startcase-4.4.0.tgz#9436e34ed26093ed7ffae1936144350915d9add8"
+
+lodash.startswith@^4.2.1:
+  version "4.2.1"
+  resolved "http://mvn//artifactory/api/npm/npm/lodash.startswith/-/lodash.startswith-4.2.1.tgz#c598c4adce188a27e53145731cdc6c0e7177600c"
 
 lodash.template@^4.0.2:
   version "4.4.0"
@@ -6484,6 +6539,13 @@ minipass@^2.2.1, minipass@^2.2.4:
   resolved "http://mvn//artifactory/api/npm/npm/minipass/-/minipass-2.2.4.tgz#03c824d84551ec38a8d1bb5bc350a5a30a354a40"
   dependencies:
     safe-buffer "^5.1.1"
+    yallist "^3.0.0"
+
+minipass@^2.3.3:
+  version "2.3.3"
+  resolved "http://mvn//artifactory/api/npm/npm/minipass/-/minipass-2.3.3.tgz#a7dcc8b7b833f5d368759cce544dccb55f50f233"
+  dependencies:
+    safe-buffer "^5.1.2"
     yallist "^3.0.0"
 
 minizlib@^1.1.0:
@@ -7102,7 +7164,7 @@ parse5@4.0.0:
   version "4.0.0"
   resolved "http://mvn//artifactory/api/npm/npm/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
 
-parse5@^3.0.1:
+parse5@^3.0.1, parse5@^3.0.3:
   version "3.0.3"
   resolved "http://mvn//artifactory/api/npm/npm/parse5/-/parse5-3.0.3.tgz#042f792ffdd36851551cf4e9e066b3874ab45b5c"
   dependencies:
@@ -8304,10 +8366,6 @@ redux@3.7.2:
     loose-envify "^1.1.0"
     symbol-observable "^1.0.3"
 
-reflect-metadata@^0.1.12:
-  version "0.1.12"
-  resolved "http://mvn//artifactory/api/npm/npm/reflect-metadata/-/reflect-metadata-0.1.12.tgz#311bf0c6b63cd782f228a81abe146a2bfa9c56f2"
-
 regenerate@^1.2.1:
   version "1.3.3"
   resolved "http://mvn//artifactory/api/npm/npm/regenerate/-/regenerate-1.3.3.tgz#0c336d3980553d755c39b586ae3b20aa49c82b7f"
@@ -8566,9 +8624,15 @@ resolve@1.1.7:
   version "1.1.7"
   resolved "http://mvn//artifactory/api/npm/npm/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.2, resolve@^1.5.0, resolve@^1.6.0:
+resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.2, resolve@^1.5.0:
   version "1.7.1"
   resolved "http://mvn//artifactory/api/npm/npm/resolve/-/resolve-1.7.1.tgz#aadd656374fd298aee895bc026b8297418677fd3"
+  dependencies:
+    path-parse "^1.0.5"
+
+resolve@^1.6.0:
+  version "1.8.1"
+  resolved "http://mvn//artifactory/api/npm/npm/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
   dependencies:
     path-parse "^1.0.5"
 
@@ -8652,7 +8716,7 @@ safe-buffer@5.1.1:
   version "5.1.1"
   resolved "http://mvn//artifactory/api/npm/npm/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "http://mvn//artifactory/api/npm/npm/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
@@ -8690,7 +8754,7 @@ schema-utils@^0.3.0:
   dependencies:
     ajv "^5.0.0"
 
-schema-utils@^0.4.0, schema-utils@^0.4.3, schema-utils@^0.4.5:
+schema-utils@^0.4.0, schema-utils@^0.4.2, schema-utils@^0.4.3, schema-utils@^0.4.5:
   version "0.4.5"
   resolved "http://mvn//artifactory/api/npm/npm/schema-utils/-/schema-utils-0.4.5.tgz#21836f0608aac17b78f9e3e24daff14a5ca13a3e"
   dependencies:
@@ -9403,6 +9467,22 @@ tapable@^0.2.7:
   version "0.2.8"
   resolved "http://mvn//artifactory/api/npm/npm/tapable/-/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"
 
+tapable@^1.0.0:
+  version "1.0.0"
+  resolved "http://mvn//artifactory/api/npm/npm/tapable/-/tapable-1.0.0.tgz#cbb639d9002eed9c6b5975eb20598d7936f1f9f2"
+
+tar@4.4.4:
+  version "4.4.4"
+  resolved "http://mvn//artifactory/api/npm/npm/tar/-/tar-4.4.4.tgz#ec8409fae9f665a4355cc3b4087d0820232bb8cd"
+  dependencies:
+    chownr "^1.0.1"
+    fs-minipass "^1.2.5"
+    minipass "^2.3.3"
+    minizlib "^1.1.0"
+    mkdirp "^0.5.0"
+    safe-buffer "^5.1.2"
+    yallist "^3.0.2"
+
 tar@^4:
   version "4.4.1"
   resolved "http://mvn//artifactory/api/npm/npm/tar/-/tar-4.4.1.tgz#b25d5a8470c976fd7a9a8a350f42c59e9fa81749"
@@ -9603,50 +9683,6 @@ ts-loader@^3.5.0:
     micromatch "^3.1.4"
     semver "^5.0.1"
 
-tslib@^1.0.0, tslib@^1.7.1, tslib@^1.8.1:
-  version "1.9.0"
-  resolved "http://mvn//artifactory/api/npm/npm/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
-
-tslint-config-airbnb@5.8.0:
-  version "5.8.0"
-  resolved "http://mvn//artifactory/api/npm/npm/tslint-config-airbnb/-/tslint-config-airbnb-5.8.0.tgz#0398cf4b5a8715b604cb40e9580532c5c0e68716"
-  dependencies:
-    tslint-consistent-codestyle "^1.10.0"
-    tslint-eslint-rules "^4.1.1"
-    tslint-microsoft-contrib "~5.0.1"
-
-tslint-consistent-codestyle@^1.10.0:
-  version "1.13.0"
-  resolved "http://mvn//artifactory/api/npm/npm/tslint-consistent-codestyle/-/tslint-consistent-codestyle-1.13.0.tgz#82abf230bf39e01159b4e9af721d489dd5ae0e6c"
-  dependencies:
-    "@fimbul/bifrost" "^0.6.0"
-    tslib "^1.7.1"
-    tsutils "^2.24.0"
-
-tslint-eslint-rules@^4.1.1:
-  version "4.1.1"
-  resolved "http://mvn//artifactory/api/npm/npm/tslint-eslint-rules/-/tslint-eslint-rules-4.1.1.tgz#7c30e7882f26bc276bff91d2384975c69daf88ba"
-  dependencies:
-    doctrine "^0.7.2"
-    tslib "^1.0.0"
-    tsutils "^1.4.0"
-
-tslint-microsoft-contrib@~5.0.1:
-  version "5.0.3"
-  resolved "http://mvn//artifactory/api/npm/npm/tslint-microsoft-contrib/-/tslint-microsoft-contrib-5.0.3.tgz#6fc3e238179cd72045c2b422e4d655f4183a8d5c"
-  dependencies:
-    tsutils "^2.12.1"
-
-tsutils@^1.4.0:
-  version "1.9.1"
-  resolved "http://mvn//artifactory/api/npm/npm/tsutils/-/tsutils-1.9.1.tgz#b9f9ab44e55af9681831d5f28d0aeeaf5c750cb0"
-
-tsutils@^2.12.1, tsutils@^2.24.0:
-  version "2.26.2"
-  resolved "http://mvn//artifactory/api/npm/npm/tsutils/-/tsutils-2.26.2.tgz#a9f9f63434a456a5e0c95a45d9a59181cb32d3bf"
-  dependencies:
-    tslib "^1.8.1"
-
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "http://mvn//artifactory/api/npm/npm/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
@@ -9678,9 +9714,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "http://mvn//artifactory/api/npm/npm/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@^2.7.2:
-  version "2.8.3"
-  resolved "http://mvn//artifactory/api/npm/npm/typescript/-/typescript-2.8.3.tgz#5d817f9b6f31bb871835f4edf0089f21abe6c170"
+typescript@^2.9.0:
+  version "2.9.2"
+  resolved "http://mvn//artifactory/api/npm/npm/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
 
 typical@^2.6.1:
   version "2.6.1"
@@ -9965,6 +10001,12 @@ vm-browserify@0.0.4:
   resolved "http://mvn//artifactory/api/npm/npm/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+vue-parser@^1.1.5:
+  version "1.1.6"
+  resolved "http://mvn//artifactory/api/npm/npm/vue-parser/-/vue-parser-1.1.6.tgz#3063c8431795664ebe429c23b5506899706e6355"
+  dependencies:
+    parse5 "^3.0.3"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
